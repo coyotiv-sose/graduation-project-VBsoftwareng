@@ -11,16 +11,16 @@ class Patient {
     this.insurance = insurance
   }
   book(doctor, date, time) {
-    const appointment = new Appointment(doctor, this, date, time)
+    if (doctor.isAvailable(date, time)) {
+      const appointment = new Appointment(doctor, this, date, time)
 
-    //const appointment = {
-    //doctor: doctor,
-    //date: date,
-    //time: time,
-    //patient: this,
-    //}
-    this.appointments.push(appointment) //  add appointment to patient's appointments
-    doctor.getsAppointment(this, date, time)
+      this.appointments.push(appointment) //  add appointment to patient's appointments
+      doctor.appointments.push(appointment)
+
+      return appointment
+    }
+
+    return
   }
 }
 

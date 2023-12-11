@@ -25,9 +25,10 @@ const anotherPatient = new Patient('Niko', 'Sanchez', '01.11.1985', 'male')
 //const doctor = { name: 'Billy', lastName: 'Fizz', especialization: 'Orthopedic', appointments: [] }
 
 patient.book(doctor, '12.12.2023', '13:00')
-// anotherPatient.book(doctor, '12.12.2023', '13:00')
+anotherPatient.book(doctor, '12.12.2023', '13:00') // shouldn't work because doctor is not available
 patient.book(anotherDoctor, '15.12.2023', '11:00')
 console.log('patient should have 2 appointments ', patient.appointments.length)
 console.log('doctor should have 1 appointment ', doctor.appointments.length)
 console.log('anotherDoctor should have 1 appointment ', anotherDoctor.appointments.length)
 //console.log('patient should have all appointments ', patient.appointments)
+// console.log(doctor.appointments)
