@@ -20,7 +20,7 @@ class Patient {
     //patient: this,
     //}
     this.appointments.push(appointment) //  add appointment to patient's appointments
-    doctor.appointments.push(appointment)
+    doctor.getsAppointment(this, date, time)
   }
 }
 
