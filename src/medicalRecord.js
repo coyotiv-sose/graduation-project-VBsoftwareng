@@ -5,3 +5,4 @@ class MedicalRecord {
     this.prescription = prescription
   }
 }
+module.exports = MedicalRecord
