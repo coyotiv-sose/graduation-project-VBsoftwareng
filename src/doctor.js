@@ -1,5 +1,5 @@
 const Appointment = require('./appointment')
-
+const MedicalRecord = require('./medicalRecord.js')
 class Doctor {
   appointments = []
   calendar = []
@@ -27,7 +27,11 @@ class Doctor {
   }
   createMedicalRecord(patient, diagnosis, prescription) {
     //create MedicalRecord instance
+    const medicalRecord = new MedicalRecord(patient, diagnosis, prescription)
+
     //add the new medicalRecord instance to the patient medicalRecord
+    patient.medicalRecordsHistory.push(medicalRecord)
+    return medicalRecord
   }
 }
 

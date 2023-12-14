@@ -1,7 +1,7 @@
 const Appointment = require('./appointment')
 class Patient {
   appointments = []
-  medicalRecords = []
+  medicalRecordsHistory = []
 
   constructor(name, lastName, birthdate, sex, insurance) {
     this.name = name
