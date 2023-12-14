@@ -2,7 +2,6 @@ const Appointment = require('./appointment')
 
 class Doctor {
   appointments = []
-  labResults = []
   calendar = []
   //package =
 
@@ -25,6 +24,10 @@ class Doctor {
 
     return !existingAppointment
     // return existingAppointment ? false : true
+  }
+  createMedicalRecord(patient, diagnosis, prescription) {
+    //create MedicalRecord instance
+    //add the new medicalRecord instance to the patient medicalRecord
   }
 }
 
