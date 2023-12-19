@@ -25,7 +25,9 @@ const anotherPatient = new Patient('Niko', 'Sanchez', '01.11.1985', 'male')
 //const doctor = { name: 'Billy', lastName: 'Fizz', especialization: 'Orthopedic', appointments: [] }
 const diagnosisForPatientZero = ['flue', 'migraine']
 const prescriptionForPatientZero = ['nasal spray', 'paracetamol']
-patientZero.book(doctor, '12.12.2023', '13:00')
+const patientMakesAppointment = patientZero.book(doctor, '12.12.2023', '13:00')
+
+patientZero.review(patientMakesAppointment, 'doctor was amazing', 5)
 doctor.createMedicalRecord(patientZero, diagnosisForPatientZero, prescriptionForPatientZero)
 anotherPatient.book(doctor, '12.12.2023', '13:00') // shouldn't work because doctor is not available
 patientZero.book(anotherDoctor, '15.12.2023', '11:00')
@@ -34,3 +36,6 @@ console.log('doctor should have 1 appointment ', doctor.appointments.length)
 console.log('anotherDoctor should have 1 appointment ', anotherDoctor.appointments.length)
 //console.log('patientZero should have all appointments ', patientZero.appointments)
 // console.log(doctor.appointments)
+console.log(patientMakesAppointment)
+console.log(doctor)
+console.log(patientZero.review)
