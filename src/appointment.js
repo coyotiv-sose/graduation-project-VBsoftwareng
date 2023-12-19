@@ -4,6 +4,8 @@ class Appointment {
     this.patient = patient
     this.date = date
     this.time = time
+    this.reviewText = undefined
+    this.ratingNumber = undefined
   }
 }
 module.exports = Appointment
