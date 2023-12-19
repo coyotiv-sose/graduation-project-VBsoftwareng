@@ -3,6 +3,7 @@ const MedicalRecord = require('./medicalRecord.js')
 class Doctor {
   appointments = []
   calendar = []
+  reviews = []
   //package =
 
   constructor(name, lastName, especialization) {
