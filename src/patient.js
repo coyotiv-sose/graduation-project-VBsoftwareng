@@ -1,4 +1,5 @@
 const Appointment = require('./appointment')
+const Review = require('./review')
 class Patient {
   appointments = []
   medicalRecordsHistory = []
@@ -21,6 +22,15 @@ class Patient {
     }
 
     return
+  }
+  review(appointment, reviewText, ratingNumber) {
+    // if the appointmnet took place (date in the past)
+    // set appoitments review text to review text
+    const review = new Review(appointment, reviewText, ratingNumber)
+
+    appointment.doctor.reviews.push(review)
+
+    return review
   }
 }
 
