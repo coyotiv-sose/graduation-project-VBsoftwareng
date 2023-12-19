@@ -6,18 +6,6 @@ const client = Axios.create({
   headers: { 'X-Custom-Header': 'foobar' },
 })
 
-async function getUsers() {
-  try {
-    const response = await client.get('/users')
-
-    console.log(response.data)
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-getUsers()
-
 async function getPatients() {
   try {
     const response = await client.get('/patients')

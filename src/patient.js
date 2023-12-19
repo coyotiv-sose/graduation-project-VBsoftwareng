@@ -32,6 +32,9 @@ class Patient {
 
     return review
   }
+  static create({ name, lastName, birthdate, sex, insurance }) {}
+
+  static list = []
 }
 
 module.exports = Patient
