@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
   const { name, lastName, especialization, location, address } = req.body
   // create a new doctor
-  const newDoctor = new Doctor(name, lastName, especialization, location, address)
+  const newDoctor = Doctor.create({ name, lastName, especialization, location, address })
   // send back that doctor
   res.send(newDoctor)
 })

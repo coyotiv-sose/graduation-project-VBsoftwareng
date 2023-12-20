@@ -36,6 +36,16 @@ class Doctor {
     patient.medicalRecordsHistory.push(medicalRecord)
     return medicalRecord
   }
+  static create({ name, lastName, especialization, location, address }) {
+    // complete static create method
+    const newDoctor = new Doctor(name, lastName, especialization, location, address)
+
+    Doctor.list.push(newDoctor)
+
+    return newDoctor
+  }
+
+  static list = []
 }
 
 module.exports = Doctor
