@@ -6,10 +6,12 @@ class Doctor {
   reviews = []
   //package =
 
-  constructor(name, lastName, especialization) {
+  constructor(name, lastName, especialization, location, address) {
     this.name = name
     this.lastName = lastName
     this.especialization = especialization
+    this.location = location
+    this.address = address
   }
   getsAppointment(patient, date, time) {
     const appointment = new Appointment(this, patient, date, time)

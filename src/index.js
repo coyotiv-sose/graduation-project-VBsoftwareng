@@ -17,8 +17,7 @@ async function main() {
   })
   console.log('Patient Pipo: ', patientPipo.data)
   console.log('Patient Thomas: ', patientThomas.data)
-
-  const doctorManuel = await axios.post('http://localhost:3000/patients', {
+  const doctorManuel = await axios.post('http://localhost:3000/doctors', {
     name: 'Manuel',
     lastName: 'Cruz',
     especialization: 'Intern',
@@ -26,6 +25,16 @@ async function main() {
     address: 'Mulstrasse 30',
   })
   console.log('Doctor Manuel:', doctorManuel.data)
+
+  // const newAppointment = await axios.post('http://localhost:3000/appointments', {
+  //   doctor: 'Jessica',
+  //   patient: 'Ingrid',
+  //   date: '24.02.1980',
+  //   time: '9:00',
+  //   location: 'Hospital los Angeles',
+  //   address: 'calle las lomas 23',
+  // })
+  //console.log('newAppointment:', newAppointment.data)
 }
 main()
 
