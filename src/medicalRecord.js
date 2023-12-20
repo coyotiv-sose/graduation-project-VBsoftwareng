@@ -1,9 +1,8 @@
 class MedicalRecord {
-  constructor(patient, diagnosis, prescription, history) {
-    this.patient = patient
+  constructor(patient, diagnosis, prescription) {
+    this.patient = patient.name
     this.diagnosis = diagnosis
     this.prescription = prescription
-    this.history = history
   }
 }
 module.exports = MedicalRecord
