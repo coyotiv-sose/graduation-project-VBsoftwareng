@@ -1,6 +1,8 @@
 var express = require('express')
 var router = express.Router()
-const MedicalRecord = require('../medicalrecord')
+const MedicalRecord = require('../medicalRecord')
+const Doctor = require('../doctor')
+const Patient = require('../patient')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -8,9 +10,12 @@ router.get('/', function (req, res, next) {
 })
 // Create a new Medical record using post
 router.post('/', function (req, res, next) {
-  const { patient, diagnosis, prescription, history } = req.body
-  // create new Medical record
-  const newMedicalRecord = new MedicalRecord(patient, diagnosis, prescription, history)
+  const { diagnosis, prescription } = req.body
+  const patient = Patient.list.find(patient => patient.name === req.body.patient)
+  // find doctor instance
+  const doctor = Doctor.list.find(doctor => doctor.name === req.body.doctor.name)
+  // create new Medical record from the already already created medical record the doctor makes
+  const newMedicalRecord = doctor.createMedicalRecord(patient, diagnosis, prescription)
   //send back that medical record
   res.send(newMedicalRecord)
 })
