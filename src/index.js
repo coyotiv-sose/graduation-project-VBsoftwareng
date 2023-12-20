@@ -40,6 +40,13 @@ async function main() {
   console.log('newAppointment:', newAppointment.data)
   const allPatients = await axios.get('http://localhost:3000/patients')
   console.log('All patients: ', allPatients.data)
+
+  const newMedicalRecord = await axios.post('http://localhost:300/medicalRecords'{
+    patient: 'Alex',
+    diagnosis: 'Flue',
+
+
+  }
 }
 main()
 
