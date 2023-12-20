@@ -26,15 +26,15 @@ async function main() {
   })
   console.log('Doctor Manuel:', doctorManuel.data)
 
-  // const newAppointment = await axios.post('http://localhost:3000/appointments', {
-  //   doctor: 'Jessica',
-  //   patient: 'Ingrid',
-  //   date: '24.02.1980',
-  //   time: '9:00',
-  //   location: 'Hospital los Angeles',
-  //   address: 'calle las lomas 23',
-  // })
-  //console.log('newAppointment:', newAppointment.data)
+  const newAppointment = await axios.post('http://localhost:3000/appointments', {
+    doctor: 'Jessica',
+    patient: 'Ingrid',
+    date: '24.02.1980',
+    time: '9:00',
+    location: 'Hospital los Angeles',
+    address: 'calle las lomas 23',
+  })
+  console.log('newAppointment:', newAppointment.data)
 }
 main()
 
