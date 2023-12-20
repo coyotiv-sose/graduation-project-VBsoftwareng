@@ -17,8 +17,16 @@ async function main() {
   })
   console.log('Patient Pipo: ', patientPipo.data)
   console.log('Patient Thomas: ', patientThomas.data)
-}
 
+  const doctorManuel = await axios.post('http://localhost:3000/patients', {
+    name: 'Manuel',
+    lastName: 'Cruz',
+    especialization: 'Intern',
+    location: 'Berlin, Kreuzberg',
+    address: 'Mulstrasse 30',
+  })
+  console.log('Doctor Manuel:', doctorManuel.data)
+}
 main()
 
 // const Doctor = require('./doctor.js')
@@ -48,7 +56,7 @@ main()
 // //const doctor = { name: 'Billy', lastName: 'Fizz', especialization: 'Orthopedic', appointments: [] }
 // const diagnosisForPatientZero = ['flue', 'migraine']
 // const prescriptionForPatientZero = ['nasal spray', 'paracetamol']
-// const patientMakesAppointment = patientZero.book(doctor, '12.12.2023', '13:00')
+// const patientMakesAppointment = patientZero.book(doctor, '12.12.2023', '13:00', 'Hospital orthopedico')
 
 // patientZero.review(patientMakesAppointment, 'doctor was amazing', 5)
 // doctor.createMedicalRecord(patientZero, diagnosisForPatientZero, prescriptionForPatientZero)
