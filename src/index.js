@@ -1,26 +1,27 @@
 const axios = require('axios')
+axios.defaults.baseURL = 'http://localhost:3000'
 
 async function main() {
-  const patientThomas = await axios.post('http://localhost:3000/patients', {
+  const patientThomas = await axios.post('/patients', {
     name: 'Thomas',
     lastName: 'ddd',
     birthdate: '12.12.1992',
     sex: 'male',
     insurance: 'tk',
   })
-  const patientPipo = await axios.post('http://localhost:3000/patients', {
+  const patientPipo = await axios.post('/patients', {
     name: 'Pipo',
     lastName: 'hix',
     birthdate: '10.12.1978',
     sex: 'male',
     insurance: 'aok',
   })
-  //await axios.delete('http://localhost:3000/patients/Pipo')
+  //await axios.delete('/patients/Pipo')
 
   console.log('Patient Pipo: ', patientPipo.data)
   console.log('Patient Thomas: ', patientThomas.data)
 
-  const doctorManuel = await axios.post('http://localhost:3000/doctors', {
+  const doctorManuel = await axios.post('/doctors', {
     name: 'Manuel',
     lastName: 'Cruz',
     especialization: 'Intern',
@@ -29,7 +30,7 @@ async function main() {
   })
   console.log('Doctor Manuel:', doctorManuel.data)
 
-  const newAppointment = await axios.post('http://localhost:3000/appointments', {
+  const newAppointment = await axios.post('/appointments', {
     doctor: 'Jessica',
     patient: 'Ingrid',
     date: '24.02.1980',
@@ -38,16 +39,18 @@ async function main() {
     address: 'calle las lomas 23',
   })
   console.log('newAppointment:', newAppointment.data)
-  const allPatients = await axios.get('http://localhost:3000/patients')
-  console.log('All patients: ', allPatients.data)
 
-  const newMedicalRecord = await axios.post('http://localhost:300/medicalRecords'{
-    patient: 'Alex',
+  const newMedicalRecord = await axios.post('/medicalRecords', {
+    patient: 'Thomas',
     diagnosis: 'Flue',
+    prescription: 'Ibu',
+    doctor: doctorManuel.data,
+  })
 
-
-  }
+  const allPatients = await axios.get('/patients')
+  console.log('All patients: ', allPatients.data)
 }
+
 main()
 
 // const Doctor = require('./doctor.js')
