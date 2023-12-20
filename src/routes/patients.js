@@ -4,7 +4,7 @@ const Patient = require('../patient')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.send({ title: 'SiDoctor' })
+  res.send({ title: 'SiDoctor yo soy el Paciente' })
 })
 // Create a new Patient using post
 router.post('/', function (req, res, next) {
