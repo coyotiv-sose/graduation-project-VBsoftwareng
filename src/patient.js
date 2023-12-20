@@ -32,7 +32,14 @@ class Patient {
 
     return review
   }
-  static create({ name, lastName, birthdate, sex, insurance }) {}
+  static create({ name, lastName, birthdate, sex, insurance }) {
+    // complete static create method
+    const newPatient = new Patient(name, lastName, birthdate, sex, insurance)
+
+    Patient.list.push(newPatient)
+
+    return newPatient
+  }
 
   static list = []
 }

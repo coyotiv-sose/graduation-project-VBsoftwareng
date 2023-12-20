@@ -15,8 +15,11 @@ async function main() {
     sex: 'male',
     insurance: 'aok',
   })
+  //await axios.delete('http://localhost:3000/patients/Pipo')
+
   console.log('Patient Pipo: ', patientPipo.data)
   console.log('Patient Thomas: ', patientThomas.data)
+
   const doctorManuel = await axios.post('http://localhost:3000/doctors', {
     name: 'Manuel',
     lastName: 'Cruz',
@@ -35,6 +38,8 @@ async function main() {
     address: 'calle las lomas 23',
   })
   console.log('newAppointment:', newAppointment.data)
+  const allPatients = await axios.get('http://localhost:3000/patients')
+  console.log('All patients: ', allPatients.data)
 }
 main()
 
