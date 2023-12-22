@@ -10,11 +10,11 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
   const { name, lastName, birthdate, sex, insurance } = req.body
   // create a new patient
-  const newPatient = Patient.create({ name, lastName, birthdate, sex, insurance })
+  Patient.create({ name, lastName, birthdate, sex, insurance })
   // patients.push(newPatient)
 
   // send back that patient
-  res.send(newPatient)
+  res.send()
 })
 //  DELETE PATIENT
 router.delete('/:patientId', function (req, res, next) {
