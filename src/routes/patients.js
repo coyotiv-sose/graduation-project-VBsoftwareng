@@ -10,11 +10,11 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
   const { name, lastName, birthdate, sex, insurance } = req.body
   // create a new patient
-  Patient.create({ name, lastName, birthdate, sex, insurance })
+  const patient = Patient.create({ name, lastName, birthdate, sex, insurance })
   // patients.push(newPatient)
 
   // send back that patient
-  res.send()
+  res.send(patient)
 })
 //  DELETE PATIENT
 router.delete('/:patientId', function (req, res, next) {
@@ -31,6 +31,17 @@ router.delete('/:patientId', function (req, res, next) {
     res.sendStatus(404)
   }
   // when i am done commiting succesfull change i use git stash pop to get my changes back
+})
+router.put('/:patientId', function (req, res, next) {
+  console.log('---------we are here---')
+  // find the patient
+  const patient = Patient.list.find(patient => patient.name === req.params.patientId)
+
+  const newValues = req.body.newValues
+
+  const updatedPatient = Patient.updatePatient(patient, newValues)
+
+  res.status(200).send(updatedPatient)
 })
 
 module.exports = router

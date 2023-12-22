@@ -8,6 +8,17 @@ const Doctor = require('../doctor')
 router.get('/', function (req, res, next) {
   res.send({ title: 'SiDoctor' })
 })
+// add put handler to change appoitnment TO DO: CREATE A ROOT HANDLER FOR APPOINTMENT
+
+// router.put('/:date', function (req, res, next) {
+//   const userEmail = req.body.userEmail
+
+//   const user = User.list.find(user => user.email === userEmail)
+
+//   const updatedStory = user.updateStoryByTitle(storyTitle, newStoryData)
+
+//   res.status(200).send(updatedStory)
+// })
 // Create a new appointment using post
 router.post('/', function (req, res, next) {
   console.log('------------------------------ Create Appointment ---------')

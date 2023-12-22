@@ -2,13 +2,13 @@ const axios = require('axios')
 axios.defaults.baseURL = 'http://localhost:3000'
 
 async function main() {
-  // const patientThomas = await axios.post('/patients', {
-  //   name: 'Thomas',
-  //   lastName: 'ddd',
-  //   birthdate: '12.12.1992',
-  //   sex: 'male',
-  //   insurance: 'tk',
-  // })
+  const patientThomas = await axios.post('/patients', {
+    name: 'Thomas',
+    lastName: 'ddd',
+    birthdate: '12.12.1992',
+    sex: 'male',
+    insurance: 'tk',
+  })
   const patientPipo = await axios.post('/patients', {
     name: 'Pipo',
     lastName: 'hix',
@@ -17,9 +17,19 @@ async function main() {
     insurance: 'aok',
   })
   //await axios.delete('/patients/Pipo')
-
-  console.log('Patient Pipo: ', patientPipo.data)
-  // console.log('Patient Thomas: ', patientThomas.data)
+  const patientForUpdate = await axios.post('/patients', {
+    name: 'Samuel',
+    lastName: 'Lui',
+    birthdate: '02.08.1979',
+    sex: 'male',
+    insurance: 'aok',
+  })
+  console.log('Patient Samuel: ', patientForUpdate.data)
+  console.log('Patient Thomas: ', patientThomas.data)
+  const updatedPatient = await axios.put('/patients/Thomas', {
+    newValues: { insurance: 'baba' },
+  })
+  console.log('updated Patient Samuel', updatedPatient.data)
 
   const doctorManuel = await axios.post('/doctors', {
     name: 'Manuel',
@@ -45,8 +55,10 @@ async function main() {
     location: 'Hospital los Angeles',
     address: 'calle las lomas 23',
   })
-  console.log('newAppointment:', newAppointment.data)
 
+  console.log('newAppointment:', newAppointment.data)
+  await axios.delete('/patients/Pipo')
+  //await axios.delete('/patients/Digdem')
   //   const newMedicalRecord = await axios.post('/medicalRecords', {
   //     patient: 'Thomas',
   //     diagnosis: 'Flue',

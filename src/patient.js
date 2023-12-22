@@ -43,6 +43,13 @@ class Patient {
     return newPatient
   }
 
+  static updatePatient(patient, newValues) {
+    const updatedPatient = { ...patient, ...newValues }
+
+    // Object.assign(patient, newValues) ((this the same as line 48))
+    return updatedPatient
+  }
+
   static list = []
 }
 
