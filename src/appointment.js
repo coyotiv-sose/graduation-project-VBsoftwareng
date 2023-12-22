@@ -1,7 +1,7 @@
 class Appointment {
-  constructor(doctor, patient, date, time, location, address) {
-    this.doctor = doctor
-    this.patient = patient
+  constructor(doctorId, patientId, date, time, location, address) {
+    this.doctorId = doctorId
+    this.patientId = patientId
     this.date = date
     this.time = time
     this.location = location

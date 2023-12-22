@@ -48,4 +48,5 @@ async function getMedicalRecords() {
     console.error(error)
   }
 }
+
 getMedicalRecords()
