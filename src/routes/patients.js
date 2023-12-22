@@ -21,10 +21,15 @@ router.delete('/:patientId', function (req, res, next) {
   // this is to access the url for patient  req.params.patientId
   //find the index of the patient in the array
   const patientIndex = Patient.list.findIndex(patient => patient.name === req.params.patientId)
-  // remove it from the array
-  Patient.list.splice(patientIndex, 1)
-  // send back a response if succesfull
-  res.sendStatus(200)
+
+  if (patientIndex !== -1) {
+    // remove it from the array
+    Patient.list.splice(patientIndex, 1)
+    // send back a response if succesfull
+    res.sendStatus(200)
+  } else {
+    res.sendStatus(404)
+  }
   // when i am done commiting succesfull change i use git stash pop to get my changes back
 })
 
