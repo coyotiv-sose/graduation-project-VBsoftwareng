@@ -1,5 +1,6 @@
 const Appointment = require('./appointment')
 const MedicalRecord = require('./medicalRecord.js')
+const Address = require('./address.js')
 class Doctor {
   appointments = []
   calendar = []
@@ -11,8 +12,18 @@ class Doctor {
     this.lastName = lastName
     this.especialization = especialization
     this.location = location
-    this.address = address
+    // this is another way to create the instance of address:
+    // const {street, zipCode, district, city } = address
+    // this.address = Address.create({ street, zipCode, district, city })
+
+    this.address = Address.create({
+      street: address.street,
+      zipCode: address.zipCode,
+      district: address.district,
+      city: address.city,
+    })
   }
+
   getsAppointment(patient, date, time) {
     const appointment = new Appointment(this, patient, date, time)
 
@@ -36,6 +47,7 @@ class Doctor {
     patient.medicalRecordsHistory.push(medicalRecord)
     return medicalRecord
   }
+
   static create({ name, lastName, especialization, location, address }) {
     // complete static create method
     const newDoctor = new Doctor(name, lastName, especialization, location, address)

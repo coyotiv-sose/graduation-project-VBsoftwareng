@@ -15,7 +15,7 @@ router.post('/', function (req, res, next) {
   // send back that doctor
   res.send(newDoctor)
 })
-//  DELETE PATIENT
+//  DELETE doctor
 router.delete('/:doctor', function (req, res, next) {
   // this is to access the url for patient  req.params.patientId
   //find the index of the patient in the array

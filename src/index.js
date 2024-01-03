@@ -35,8 +35,8 @@ async function main() {
     name: 'Manuel',
     lastName: 'Cruz',
     especialization: 'Intern',
-    location: 'Berlin, Kreuzberg',
-    address: 'Mulstrasse 30',
+    location: 'Caritas Hospital',
+    address: { street: 'solmsstrasse', zipCode: '1760', district: 'Kreuzberg', city: 'Berlin' },
   })
   //   const doctorNuman = await axios.post('/doctors', {
   //     name: 'Numan',
