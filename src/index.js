@@ -46,8 +46,15 @@ async function main() {
     address: 'Muler 90',
   })
   //   console.log('Doctor Numan:', doctorNuman.data)
+  console.log('------------------- Start doctor tests -------------------')
+
   const doctor = await axios.get('/doctors/Numan')
   console.log('Doctor name ', doctor.data.name)
+
+  const doctorIsNotFound = await axios.get('/doctors/Nobody')
+  console.log(`This test will return an empty response, because the doctor name doesn't exist: `, doctorIsNotFound.data)
+
+  console.log('------------------- End doctor tests -------------------')
 
   const newAppointment = await axios.post('/appointments', {
     doctorName: 'Manuel',
