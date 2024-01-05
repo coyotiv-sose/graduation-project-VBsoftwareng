@@ -16,6 +16,12 @@ router.post('/', function (req, res, next) {
   // send back that patient
   res.send(patient)
 })
+router.get('/:patientName/appointments', function (req, res, next) {
+  const patient = Patient.list.find(patient => patient.name === req.params.patientName)
+
+  res.send(patient.appointments)
+})
+
 //  DELETE PATIENT
 router.delete('/:patientId', function (req, res, next) {
   // this is to access the url for patient  req.params.patientId
