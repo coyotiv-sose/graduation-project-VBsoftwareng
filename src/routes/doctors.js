@@ -17,9 +17,11 @@ router.get('/:doctorName', function (req, res, next) {
     // you look for the doctor name you are searching
     if (Doctor.list[i].name === req.params.doctorName) {
       // if the name is valid or the same you are looking for then is that one if not another one
-      res.send(Doctor.list[i])
+
+      return res.send(Doctor.list[i])
     }
   }
+  res.sendStatus(404)
 })
 
 // Create a new Doctor using post
