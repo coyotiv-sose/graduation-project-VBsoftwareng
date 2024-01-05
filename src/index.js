@@ -38,22 +38,22 @@ async function main() {
     location: 'Caritas Hospital',
     address: { street: 'solmsstrasse', zipCode: '1760', district: 'Kreuzberg', city: 'Berlin' },
   })
-  //   const doctorNuman = await axios.post('/doctors', {
-  //     name: 'Numan',
-  //     lastName: 'Fez',
-  //     especialization: 'Cirujano',
-  //     location: 'Estambul, Turquia',
-  //     address: 'Muler 90',
-  //   })
+  const doctorNuman = await axios.post('/doctors', {
+    name: 'Numan',
+    lastName: 'Fez',
+    especialization: 'Cirujano',
+    location: 'Estambul, Turquia',
+    address: 'Muler 90',
+  })
   //   console.log('Doctor Numan:', doctorNuman.data)
+  const doctor = await axios.get('/doctors/Numan')
+  console.log('Doctor name ', doctor.data.name)
 
   const newAppointment = await axios.post('/appointments', {
-    doctor: 'Manuel',
-    patientName: 'Pipo',
+    doctorName: 'Manuel',
+    patientName: 'Samuel',
     date: '24.02.1980',
     time: '9:00',
-    location: 'Hospital los Angeles',
-    address: 'calle las lomas 23',
   })
 
   console.log('newAppointment:', newAppointment.data)
