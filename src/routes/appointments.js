@@ -22,18 +22,18 @@ router.get('/', function (req, res, next) {
 // Create a new appointment using post
 router.post('/', function (req, res, next) {
   console.log('------------------------------ Create Appointment ---------')
-  const { doctor, patientName, date, time, location, address } = req.body
+  const { doctorName, patientName, date, time } = req.body
   // create a new patient
   const patientIndex = Patient.list.findIndex(patient => patient.name === patientName)
   const patientInformation = Patient.list[patientIndex]
 
-  //const doctorIndex = Doctor.list.findIndex(doctor => doctor.name === doctorName)
-  //const doctorInformation = Doctor.list[doctorIndex]
+  const doctorIndex = Doctor.list.findIndex(doctor => doctor.name === doctorName)
+  const doctorInformation = Doctor.list[doctorIndex]
 
-  const doctorManuel = new Doctor('Manuel', 'Cruz', 'Intern', 'Berlin, Kreuzberg', 'Mullstrasse 30')
+  //const doctorManuel = new Doctor('Manuel', 'Cruz', 'Intern', 'Berlin, Kreuzberg', 'Mullstrasse 30')
 
   //HOW DO I GET ACCESS TO A RETURN APPOINTMENT
-  const newAppointment = patientInformation.book(doctorManuel, date, time)
+  const newAppointment = patientInformation.book(doctorInformation, date, time)
 
   // send back that patient
   console.log('------------------------------ Created Appointment ---------')
