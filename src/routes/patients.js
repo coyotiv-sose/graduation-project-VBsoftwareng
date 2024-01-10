@@ -8,6 +8,8 @@ router.get('/', function (req, res, next) {
 })
 // Create a new Patient using post
 router.post('/', function (req, res, next) {
+  // const name = req.body.name
+  // const lastName = req.body.lastName
   const { name, lastName, birthdate, sex, insurance } = req.body
   // create a new patient
   const patient = Patient.create({ name, lastName, birthdate, sex, insurance })
@@ -38,6 +40,7 @@ router.delete('/:patientId', function (req, res, next) {
   }
   // when i am done commiting succesfull change i use git stash pop to get my changes back
 })
+// when I need to change information I use the put handler :means dynamic
 router.put('/:patientId', function (req, res, next) {
   console.log('---------we are here---')
   // find the patient

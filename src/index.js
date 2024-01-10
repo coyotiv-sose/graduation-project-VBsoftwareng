@@ -52,12 +52,17 @@ async function main() {
   const newAppointment = await axios.post('/appointments', {
     doctorName: 'Manuel',
     patientName: 'Samuel',
-    date: '24.02.1980',
+    date: '24.02.2024',
     time: '9:00',
   })
 
   console.log('newAppointment:', newAppointment.data)
   await axios.delete('/patients/Pipo')
+
+  const patientChange = await axios.put('/patients/Samuel', {
+    newValues: { insurance: 'axa' },
+  })
+  console.log(patientChange.data)
   //await axios.delete('/patients/Digdem')
   //   const newMedicalRecord = await axios.post('/medicalRecords', {
   //     patient: 'Thomas',
@@ -67,9 +72,9 @@ async function main() {
   //   })
 
   //   const allDoctors = await axios.get('/doctors')
-  //   const allPatients = await axios.get('/patients')
-  //   console.log('All patients: ', allPatients.data)
-  //   console.log('All doctors', allDoctors.data)
+  const allPatients = await axios.get('/patients')
+  console.log('All patients: ', allPatients.data)
+  // console.log('All doctors', allDoctors.data)
 }
 
 main()
