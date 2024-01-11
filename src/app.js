@@ -47,4 +47,6 @@ app.use(function (err, req, res, next) {
   res.render('error')
 })
 
+console.log(`i am alive!`)
+
 module.exports = app

@@ -9,10 +9,8 @@ ADD package.json package-lock.json ./
 RUN npm install
 
 ADD bin ./bin
-
+ADD src ./src
 
 CMD ["nodemon"]
 
 # we install it so we can use it within this container everywhere
-
- // ADD src ./src
