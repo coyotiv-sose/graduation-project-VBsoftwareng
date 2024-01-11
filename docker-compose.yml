@@ -1,0 +1,21 @@
+services:
+  app:
+    image: cicd201
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # - MONGODB_USERNAME=VBsoftwareeng
+      # - MONGODB_PASSWORD=ozX5YTe3eLwR0wXS
+      # - MONGODB_DATABASE
+      # - MONGODB_REMOTE =1
+      - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/cicd201
+    ports:
+      - 3000:3000
+      - 35729:35729
+    volumes:
+      - ./src:/app/src
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
