@@ -1,8 +1,8 @@
 services:
   app:
-    image: cicd201
+    image: sibackend
     build:
-      context: .
+      context: backend
       dockerfile: Dockerfile
     environment:
       # - MONGODB_USERNAME=VBsoftwareeng
@@ -14,7 +14,7 @@ services:
       - 3000:3000
       - 35729:35729
     volumes:
-      - ./src:/app/src
+      - ./backend/src:/app/src
   mongodb:
     image: mongo
     ports:
