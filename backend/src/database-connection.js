@@ -12,7 +12,7 @@ const mongoose = require('mongoose')
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING).then(() => console.log('conected to mongodb'))
 
-// const Cat = mongoose.model('Cat', { name: String })
+//const Cat = mongoose.model('Cat', { name: String })
 
 // // const connectionString = process.env.MONGODB_REMOTE
 // //   ? `mongodb+srv://${username}:${password}@${dbName}?retryWrites=true&w=majority`
@@ -20,5 +20,5 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING).then(() => console.log('
 
 // // mongoose.connect(conecctionString, {})
 
-// const kitty = new Cat({ name: 'Zildjian' })
+// const kitty = new Cat({ name: 'Zildjian', })
 // kitty.save().then(() => console.log('meow'))

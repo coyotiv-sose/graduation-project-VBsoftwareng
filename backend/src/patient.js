@@ -1,5 +1,13 @@
 const Appointment = require('./appointment')
 const Review = require('./review')
+const mongoose = require('mongoose')
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  patients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Patients' }],
+})
+
+module.exports = mongoose.model('User', userSchema)
 class Patient {
   appointments = []
   medicalRecordsHistory = []
@@ -52,5 +60,5 @@ class Patient {
 
   static list = []
 }
-
-module.exports = Patient
+userSchema.loadClass(Patient)
+// module.exports = Patient

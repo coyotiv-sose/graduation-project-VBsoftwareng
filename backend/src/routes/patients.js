@@ -3,16 +3,19 @@ const router = express.Router()
 const Patient = require('../patient')
 
 /* GET patients listing. */
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res, next) {
+  const patients = await Patient.findOne()
+  // or you can also write an more simplified like res.send(await Patient.findOne())
   res.send(Patient.list)
 })
+
 // Create a new Patient using post
-router.post('/', function (req, res, next) {
+router.post('/', async function (req, res, next) {
   // const name = req.body.name
   // const lastName = req.body.lastName
   const { name, lastName, birthdate, sex, insurance } = req.body
   // create a new patient
-  const patient = Patient.create({ name, lastName, birthdate, sex, insurance })
+  const patient = await Patient.create({ name, lastName, birthdate, sex, insurance })
   // patients.push(newPatient)
 
   // send back that patient
@@ -52,5 +55,7 @@ router.put('/:patientId', function (req, res, next) {
 
   res.status(200).send(updatedPatient)
 })
+
+
 
 module.exports = router
