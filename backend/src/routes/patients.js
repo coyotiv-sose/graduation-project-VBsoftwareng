@@ -28,20 +28,22 @@ router.get('/:patientName/appointments', function (req, res, next) {
 })
 
 //  DELETE PATIENT
-router.delete('/:patientId', function (req, res, next) {
+router.delete('/:patientId', async function (req, res, next) {
   // this is to access the url for patient  req.params.patientId
   //find the index of the patient in the array
-  const patientIndex = Patient.list.findIndex(patient => patient.name === req.params.patientId)
+  //const patientIndex = Patient.findIndex(patient => patient.name === req.params.patientId) I have to change it to put mongose
+  await Patient.findByIdAndDelete(req.params.patientId)
 
-  if (patientIndex !== -1) {
-    // remove it from the array
-    Patient.list.splice(patientIndex, 1)
-    // send back a response if succesfull
-    res.sendStatus(200)
-  } else {
-    res.sendStatus(404)
-  }
+  // if (patientIndex !== -1) {
+  //   // remove it from the array
+  //   Patient.list.splice(patientIndex, 1)
+  //   // send back a response if succesfull
+  //   res.sendStatus(200)
+  // } else {
+  //   res.sendStatus(404)
+  // }
   // when i am done commiting succesfull change i use git stash pop to get my changes back
+  res.sendStatus(200)
 })
 // when I need to change information I use the put handler :means dynamic
 router.put('/:patientId', function (req, res, next) {
@@ -55,7 +57,5 @@ router.put('/:patientId', function (req, res, next) {
 
   res.status(200).send(updatedPatient)
 })
-
-
 
 module.exports = router

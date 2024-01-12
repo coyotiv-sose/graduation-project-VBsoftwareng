@@ -16,65 +16,65 @@ async function main() {
     sex: 'male',
     insurance: 'aok',
   })
-  //await axios.delete('/patients/Pipo')
-  const patientForUpdate = await axios.post('/patients', {
-    name: 'Samuel',
-    lastName: 'Lui',
-    birthdate: '02.08.1979',
-    sex: 'male',
-    insurance: 'aok',
-  })
-  console.log('Patient Samuel: ', patientForUpdate.data)
-  console.log('Patient Thomas: ', patientThomas.data)
-  const updatedPatient = await axios.put('/patients/Thomas', {
-    newValues: { insurance: 'baba' },
-  })
-  console.log('updated Patient Samuel', updatedPatient.data)
+  await axios.delete(`/patients/${patientPipo.data._id}`)
+  // const patientForUpdate = await axios.post('/patients', {
+  //   name: 'Samuel',
+  //   lastName: 'Lui',
+  //   birthdate: '02.08.1979',
+  //   sex: 'male',
+  //   insurance: 'aok',
+  // })
+  // console.log('Patient Samuel: ', patientForUpdate.data)
+  // console.log('Patient Thomas: ', patientThomas.data)
+  // const updatedPatient = await axios.put('/patients/Thomas', {
+  //   newValues: { insurance: 'baba' },
+  // })
+  // console.log('updated Patient Samuel', updatedPatient.data)
 
-  const doctorManuel = await axios.post('/doctors', {
-    name: 'Manuel',
-    lastName: 'Cruz',
-    especialization: 'Intern',
-    location: 'Caritas Hospital',
-    address: { street: 'solmsstrasse', zipCode: '1760', district: 'Kreuzberg', city: 'Berlin' },
-  })
-  const doctorNuman = await axios.post('/doctors', {
-    name: 'Numan',
-    lastName: 'Fez',
-    especialization: 'Cirujano',
-    location: 'Estambul, Turquia',
-    address: 'Muler 90',
-  })
-  //   console.log('Doctor Numan:', doctorNuman.data)
-  const doctor = await axios.get('/doctors/Numan')
-  console.log('Doctor name ', doctor.data.name)
+  // const doctorManuel = await axios.post('/doctors', {
+  //   name: 'Manuel',
+  //   lastName: 'Cruz',
+  //   especialization: 'Intern',
+  //   location: 'Caritas Hospital',
+  //   address: { street: 'solmsstrasse', zipCode: '1760', district: 'Kreuzberg', city: 'Berlin' },
+  // })
+  // const doctorNuman = await axios.post('/doctors', {
+  //   name: 'Numan',
+  //   lastName: 'Fez',
+  //   especialization: 'Cirujano',
+  //   location: 'Estambul, Turquia',
+  //   address: 'Muler 90',
+  // })
+  // //   console.log('Doctor Numan:', doctorNuman.data)
+  // const doctor = await axios.get('/doctors/Numan')
+  // console.log('Doctor name ', doctor.data.name)
 
-  const newAppointment = await axios.post('/appointments', {
-    doctorName: 'Manuel',
-    patientName: 'Samuel',
-    date: '24.02.2024',
-    time: '9:00',
-  })
+  // const newAppointment = await axios.post('/appointments', {
+  //   doctorName: 'Manuel',
+  //   patientName: 'Samuel',
+  //   date: '24.02.2024',
+  //   time: '9:00',
+  // })
 
-  console.log('newAppointment:', newAppointment.data)
-  await axios.delete('/patients/Pipo')
+  // console.log('newAppointment:', newAppointment.data)
+  // await axios.delete('/patients/Pipo')
 
-  const patientChange = await axios.put('/patients/Samuel', {
-    newValues: { insurance: 'axa' },
-  })
-  console.log(patientChange.data)
-  //await axios.delete('/patients/Digdem')
-  //   const newMedicalRecord = await axios.post('/medicalRecords', {
-  //     patient: 'Thomas',
-  //     diagnosis: 'Flue',
-  //     prescription: 'Ibu',
-  //     doctor: doctorManuel.data,
-  //   })
+  // const patientChange = await axios.put('/patients/Samuel', {
+  //   newValues: { insurance: 'axa' },
+  // })
+  // console.log(patientChange.data)
+  // //await axios.delete('/patients/Digdem')
+  // //   const newMedicalRecord = await axios.post('/medicalRecords', {
+  // //     patient: 'Thomas',
+  // //     diagnosis: 'Flue',
+  // //     prescription: 'Ibu',
+  // //     doctor: doctorManuel.data,
+  // //   })
 
-  //   const allDoctors = await axios.get('/doctors')
-  const allPatients = await axios.get('/patients')
-  console.log('All patients: ', allPatients.data)
-  // console.log('All doctors', allDoctors.data)
+  // //   const allDoctors = await axios.get('/doctors')
+  // const allPatients = await axios.get('/patients')
+  // console.log('All patients: ', allPatients.data)
+  // // console.log('All doctors', allDoctors.data)
 }
 
 main()
