@@ -1,16 +1,29 @@
 const Appointment = require('./appointment')
 const Review = require('./review')
-class Patient {
-  appointments = []
-  medicalRecordsHistory = []
+const mongoose = require('mongoose')
 
-  constructor(name, lastName, birthdate, sex, insurance) {
-    this.name = name
-    this.lastName = lastName
-    this.birthdate = birthdate
-    this.sex = sex
-    this.insurance = insurance
-  }
+const patientSchema = new mongoose.Schema({
+  name: String,
+  lastName: String,
+  birthdate: String,
+  sex: String,
+  insurance: String,
+  appointments: [],
+  medicalRecordHistory: [],
+})
+
+module.exports = mongoose.model('Patient', patientSchema)
+class Patient {
+  // appointments = []
+  // medicalRecordsHistory = []
+
+  // constructor(name, lastName, birthdate, sex, insurance) {
+  //   this.name = name
+  //   this.lastName = lastName
+  //   this.birthdate = birthdate
+  //   this.sex = sex
+  //   this.insurance = insurance
+  // }
   book(doctor, date, time) {
     console.log(doctor, date, time)
     if (doctor.isAvailable(date, time)) {
@@ -52,5 +65,5 @@ class Patient {
 
   static list = []
 }
-
-module.exports = Patient
+// patientSchema.loadClass(Patient)
+// module.exports = Patient

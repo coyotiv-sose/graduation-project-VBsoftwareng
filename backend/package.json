@@ -1,15 +1,18 @@
 {
-  "name": "template-node",
-  "version": "0.0.0",
+  "name": "dr4gon-teaching-examples",
+  "version": "0.2.1",
   "private": true,
-  "description": "Node + PlantUML Starter Template",
+  "description": "Dr4gon's teaching examples",
   "license": "MIT",
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "eslint:check": "npx eslint .",
     "eslint:fix": "npx eslint --fix .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_OPTIONS='--experimental-vm-modules --experimental-specifier-resolution=node' jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "DOTENV_CONFIG_PATH=./.env.test.local jest --coverage",
+    "test-wc": "DOTENV_CONFIG_PATH=./.env.test.local jest --watch --coverage"
   },
   "devDependencies": {
     "eslint": "^8.19.0",
@@ -17,8 +20,10 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "nodemon": "^3.0.2",
-    "prettier": "^2.7.1"
+    "jest": "^29.7.0",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
+    "supertest": "^6.3.3"
   },
   "dependencies": {
     "axios": "^1.6.2",
@@ -29,6 +34,12 @@
     "http-errors": "^2.0.0",
     "mongoose": "^8.0.3",
     "morgan": "^1.10.0",
+    "pluralize": "^8.0.0",
     "pug": "^3.0.2"
+  },
+  "jest": {
+    "setupFiles": [
+      "dotenv/config"
+    ]
   }
 }

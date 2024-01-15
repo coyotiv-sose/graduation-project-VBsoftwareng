@@ -1,21 +1,30 @@
 services:
-  app:
-    image: cicd201
+  backend:
+    image: sibackend
     build:
-      context: .
+      context: backend
       dockerfile: Dockerfile
-    environment:
-      # - MONGODB_USERNAME=VBsoftwareeng
-      # - MONGODB_PASSWORD=ozX5YTe3eLwR0wXS
-      # - MONGODB_DATABASE
-      # - MONGODB_REMOTE =1
-      - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/cicd201
-    ports:
+    ports: # expose port 3000 to the outside world, so that we can actually access it
       - 3000:3000
-      - 35729:35729
+    environment:
+      - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/floater
     volumes:
-      - ./src:/app/src
+      - ./backend/src:/src
+
+  frontend:
+    image: frontend_v4
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 5173:5173
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+
   mongodb:
     image: mongo
     ports:
       - 27017:27017
+    volumes:
+      - ./data:/data/db
