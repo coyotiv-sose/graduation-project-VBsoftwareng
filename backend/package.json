@@ -9,7 +9,7 @@
     "dev": "nodemon ./bin/www",
     "eslint:check": "npx eslint .",
     "eslint:fix": "npx eslint --fix .",
-    "test": "jest",
+    "test": "NODE_OPTIONS='--experimental-vm-modules --experimental-specifier-resolution=node' jest",
     "test:watch": "jest --watch",
     "test:coverage": "DOTENV_CONFIG_PATH=./.env.test.local jest --coverage",
     "test-wc": "DOTENV_CONFIG_PATH=./.env.test.local jest --watch --coverage"
@@ -36,5 +36,10 @@
     "morgan": "^1.10.0",
     "pluralize": "^8.0.0",
     "pug": "^3.0.2"
+  },
+  "jest": {
+    "setupFiles": [
+      "dotenv/config"
+    ]
   }
 }
