@@ -16,6 +16,7 @@ async function main() {
     sex: 'male',
     insurance: 'aok',
   })
+
   await axios.delete(`/patients/${patientPipo.data._id}`)
   // const patientForUpdate = await axios.post('/patients', {
   //   name: 'Samuel',
@@ -31,20 +32,20 @@ async function main() {
   // })
   // console.log('updated Patient Samuel', updatedPatient.data)
 
-  // const doctorManuel = await axios.post('/doctors', {
-  //   name: 'Manuel',
-  //   lastName: 'Cruz',
-  //   especialization: 'Intern',
-  //   location: 'Caritas Hospital',
-  //   address: { street: 'solmsstrasse', zipCode: '1760', district: 'Kreuzberg', city: 'Berlin' },
-  // })
-  // const doctorNuman = await axios.post('/doctors', {
-  //   name: 'Numan',
-  //   lastName: 'Fez',
-  //   especialization: 'Cirujano',
-  //   location: 'Estambul, Turquia',
-  //   address: 'Muler 90',
-  // })
+  const doctorManuel = await axios.post('/doctors', {
+    name: 'Manuel',
+    lastName: 'Cruz',
+    especialization: 'Intern',
+    location: 'Caritas Hospital',
+    address: { street: 'solmsstrasse', zipCode: '1760', district: 'Kreuzberg', city: 'Berlin' },
+  })
+  const doctorNuman = await axios.post('/doctors', {
+    name: 'Numan',
+    lastName: 'Fez',
+    especialization: 'Cirujano',
+    location: 'Estambul, Turquia',
+    address: { street: 'solmsstrasse', zipCode: '1760', district: 'Kreuzberg', city: 'Berlin' },
+  })
   // //   console.log('Doctor Numan:', doctorNuman.data)
   // const doctor = await axios.get('/doctors/Numan')
   // console.log('Doctor name ', doctor.data.name)

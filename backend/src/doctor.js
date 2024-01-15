@@ -1,28 +1,43 @@
 const Appointment = require('./appointment')
 const MedicalRecord = require('./medicalRecord.js')
 const Address = require('./address.js')
+const mongoose = require('mongoose')
+
+const doctorSchema = new mongoose.Schema({
+  name: String,
+  lastName: String,
+  especialization: String,
+  location: String,
+  address: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Address',
+  },
+  appointments: [],
+  calendar: [],
+  reviews: [],
+})
 class Doctor {
-  appointments = []
-  calendar = []
-  reviews = []
-  //package =
+  // appointments = []
+  // calendar = []
+  // reviews = []
+  // //package =
 
-  constructor(name, lastName, especialization, location, address) {
-    this.name = name
-    this.lastName = lastName
-    this.especialization = especialization
-    this.location = location
-    // this is another way to create the instance of address:
-    // const {street, zipCode, district, city } = address
-    // this.address = Address.create({ street, zipCode, district, city })
+  // constructor(name, lastName, especialization, location, address) {
+  //   this.name = name
+  //   this.lastName = lastName
+  //   this.especialization = especialization
+  //   this.location = location
+  // this is another way to create the instance of address:
+  // const {street, zipCode, district, city } = address
+  // this.address = Address.create({ street, zipCode, district, city })
 
-    this.address = Address.create({
-      street: address.street,
-      zipCode: address.zipCode,
-      district: address.district,
-      city: address.city,
-    })
-  }
+  //   this.address = Address.create({
+  //     street: address.street,
+  //     zipCode: address.zipCode,
+  //     district: address.district,
+  //     city: address.city,
+  //   })
+  // }
 
   getsAppointment(patient, date, time) {
     const appointment = new Appointment(this, patient, date, time)
@@ -48,16 +63,16 @@ class Doctor {
     return medicalRecord
   }
 
-  static create({ name, lastName, especialization, location, address }) {
-    // complete static create method
-    const newDoctor = new Doctor(name, lastName, especialization, location, address)
+  // static create({ name, lastName, especialization, location, address }) {
+  //   // complete static create method
+  //   const newDoctor = new Doctor(name, lastName, especialization, location, address)
 
-    Doctor.list.push(newDoctor)
+  //   Doctor.list.push(newDoctor)
 
-    return newDoctor
-  }
+  //   return newDoctor
+  // }
 
-  static list = []
+  // static list = []
 }
 
-module.exports = Doctor
+module.exports = mongoose.model('Doctor', doctorSchema)

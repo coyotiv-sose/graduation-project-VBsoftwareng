@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Doctor = require('../doctor')
+const Address = require('../address')
 
 /* GET doctors listing. */
 router.get('/', function (req, res, next) {
@@ -25,10 +26,16 @@ router.get('/:doctorName', function (req, res, next) {
 })
 
 // Create a new Doctor using post
-router.post('/', function (req, res, next) {
+router.post('/', async function (req, res, next) {
   const { name, lastName, especialization, location, address } = req.body
+  const newAddress = await Address.create({
+    street: address.street,
+    zipCode: address.zipCode,
+    district: address.district,
+    city: address.city,
+  })
   // create a new doctor
-  const newDoctor = Doctor.create({ name, lastName, especialization, location, address })
+  const newDoctor = await Doctor.create({ name, lastName, especialization, location, address: newAddress })
   // send back that doctor
   res.send(newDoctor)
 })
