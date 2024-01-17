@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Patient = require('../patient')
+const Patient = require('../model/patient')
 
 /* GET patients listing. */
 router.get('/', async function (req, res, next) {

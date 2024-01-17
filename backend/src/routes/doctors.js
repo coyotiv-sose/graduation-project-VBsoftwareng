@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const Doctor = require('../doctor')
-const Address = require('../address')
+const Doctor = require('../model/doctor')
+const Address = require('../model/address')
 
 /* GET doctors listing. */
-router.get('/', function (req, res, next) {
-  res.send(Doctor.list)
+router.get('/', async function (req, res, next) {
+  res.send(await Doctor.find())
 })
 router.get('/:doctorName', function (req, res, next) {
   //find doctor instance inside of the doctor list array by doctorName

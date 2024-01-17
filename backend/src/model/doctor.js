@@ -1,4 +1,4 @@
-const Appointment = require('./appointment')
+const Appointment = require('./appointment.js')
 const MedicalRecord = require('./medicalRecord.js')
 const Address = require('./address.js')
 const mongoose = require('mongoose')

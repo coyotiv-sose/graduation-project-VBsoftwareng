@@ -1,8 +1,8 @@
 var express = require('express')
 var router = express.Router()
-const MedicalRecord = require('../medicalRecord')
-const Doctor = require('../doctor')
-const Patient = require('../patient')
+const MedicalRecord = require('../model/medicalRecord')
+const Doctor = require('../model/doctor')
+const Patient = require('../model/patient')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
