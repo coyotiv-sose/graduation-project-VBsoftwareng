@@ -13,6 +13,7 @@ var doctorsRouter = require('./routes/doctors.js')
 var appointmentsRouter = require('./routes/appointments.js')
 var medicalRecordsRouter = require('./routes/medicalRecords.js')
 const cors = require('cors')
+const session = require('express-session')
 var app = express()
 
 // view engine setup
@@ -20,7 +21,14 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
 app.use(cors())
-
+app.use(
+  session({
+    secret: 'SuperSecureSecretNobodyKnows', // is required to enrcypt your session specifically to you like 2FA
+    // resave: false,
+    // saveUninitialized: true,
+    // cookie: { secure: false } // TODO: set to true when using https
+  })
+)
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
