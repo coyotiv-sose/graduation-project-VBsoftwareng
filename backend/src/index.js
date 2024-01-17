@@ -46,9 +46,9 @@ async function main() {
     location: 'Estambul, Turquia',
     address: { street: 'solmsstrasse', zipCode: '1760', district: 'Kreuzberg', city: 'Berlin' },
   })
-  // //   console.log('Doctor Numan:', doctorNuman.data)
-  // const doctor = await axios.get('/doctors/Numan')
-  // console.log('Doctor name ', doctor.data.name)
+  //   console.log('Doctor Numan:', doctorNuman.data)
+  const doctor = await axios.get(`/doctors/${doctorNuman.data._id}`)
+  console.log('Doctor name ', doctor.data.name)
 
   // const newAppointment = await axios.post('/appointments', {
   //   doctorName: 'Manuel',

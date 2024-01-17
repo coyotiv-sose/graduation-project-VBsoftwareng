@@ -7,22 +7,25 @@ const Address = require('../model/address')
 router.get('/', async function (req, res, next) {
   res.send(await Doctor.find())
 })
-router.get('/:doctorName', function (req, res, next) {
+router.get('/:doctorId', async function (req, res, next) {
+  const doctor = await Doctor.findById(req.params.doctorId)
+  res.send(doctor)
+
   //find doctor instance inside of the doctor list array by doctorName
   //res.send(Doctor.list.doctorName)
   //what steps i need to retrive a doctor?
   //I need to look for an specific doctor in the list
-  for (let i = 0; i < Doctor.list.length; i++) {
-    // you see the doctor list
+  // //for (let i = 0; i < Doctor.list.length; i++) {
+  //   // you see the doctor list
 
-    // you look for the doctor name you are searching
-    if (Doctor.list[i].name === req.params.doctorName) {
-      // if the name is valid or the same you are looking for then is that one if not another one
+  //   // you look for the doctor name you are searching
+  //   if (Doctor.list[i].name === req.params.doctorName) {
+  //     // if the name is valid or the same you are looking for then is that one if not another one
 
-      return res.send(Doctor.list[i])
-    }
-  }
-  res.sendStatus(404)
+  //     return res.send(Doctor.list[i])
+  //   }
+  // }
+  // res.sendStatus(404)
 })
 
 // Create a new Doctor using post
