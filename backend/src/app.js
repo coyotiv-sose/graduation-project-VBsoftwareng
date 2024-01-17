@@ -34,6 +34,20 @@ app.use(
     },
   })
 )
+// intercept any http request to the backend
+app.use((req, res, next) => {
+  const numberOfVisits = req.session.numberOfVisits || 0
+  req.session.numberOfVisits = numberOfVisits + 1
+  req.session.blubb = 'blubb'
+  req.session.history = req.session.history || []
+  req.session.history.push(req.url)
+  req.session.ip = req.ip
+  req.session.userName = 'Pipo'
+
+  console.log('Show me my request:', req.session)
+
+  next()
+})
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -45,6 +59,8 @@ app.use('/patients', patientsRouter)
 app.use('/doctors', doctorsRouter)
 app.use('/appointments', appointmentsRouter)
 app.use('/medicalRecords', medicalRecordsRouter)
+
+// intercept any http request to the backend
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
