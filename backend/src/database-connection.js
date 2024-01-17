@@ -10,7 +10,11 @@ const mongoose = require('mongoose')
 //   connectionString = mongo
 // }
 
-mongoose.connect(process.env.MONGODB_CONNECTION_STRING).then(() => console.log('conected to mongodb'))
+mongoose
+  .connect(process.env.MONGODB_CONNECTION_STRING)
+  .then(() => console.log('conected to mongodb'))
+  .then(() => console.log('Connected to MongoDB', process.env.MONGODB_CONNECTION_STRING))
+  .catch(err => console.log('Could not connect to MongoDB', err))
 
 //const Cat = mongoose.model('Cat', { name: String })
 

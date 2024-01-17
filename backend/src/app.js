@@ -17,12 +17,16 @@ const session = require('express-session')
 
 const MongoStore = require('connect-mongo')
 
+const mongoose = require('mongoose')
+
 var app = express()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 console.log(process.env.ENVIRONMENT === 'production')
+
+let connectionPromise = mongoose.connection.asPromise().then(connection => (connectionPromise = connection.getClient()))
 
 app.use(cors())
 app.use(
@@ -36,7 +40,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24 * 14, // how long the cookie is valid in ms
     },
     store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_CONNECTION_STRING,
+      clientPromise: connectionPromise,
       stringify: false,
     }),
   })
