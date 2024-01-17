@@ -14,6 +14,9 @@ var appointmentsRouter = require('./routes/appointments.js')
 var medicalRecordsRouter = require('./routes/medicalRecords.js')
 const cors = require('cors')
 const session = require('express-session')
+
+const MongoStore = require('connect-mongo')
+
 var app = express()
 
 // view engine setup
@@ -32,6 +35,10 @@ app.use(
       httpOnly: process.env.ENVIRONMENT === 'production',
       maxAge: 1000 * 60 * 60 * 24 * 14, // how long the cookie is valid in ms
     },
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_CONNECTION_STRING,
+      stringify: false,
+    }),
   })
 )
 // intercept any http request to the backend
