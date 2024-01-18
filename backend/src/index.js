@@ -18,13 +18,13 @@ async function main() {
   })
 
   await axios.delete(`/patients/${patientPipo.data._id}`)
-  // const patientForUpdate = await axios.post('/patients', {
-  //   name: 'Samuel',
-  //   lastName: 'Lui',
-  //   birthdate: '02.08.1979',
-  //   sex: 'male',
-  //   insurance: 'aok',
-  // })
+  const patientForUpdate = await axios.post('/patients', {
+    name: 'Samuel',
+    lastName: 'Lui',
+    birthdate: '02.08.1979',
+    sex: 'male',
+    insurance: 'aok',
+  })
   // console.log('Patient Samuel: ', patientForUpdate.data)
   // console.log('Patient Thomas: ', patientThomas.data)
   // const updatedPatient = await axios.put('/patients/Thomas', {
@@ -48,16 +48,24 @@ async function main() {
   })
   //   console.log('Doctor Numan:', doctorNuman.data)
   const doctor = await axios.get(`/doctors/${doctorNuman.data._id}`)
-  console.log('Doctor name ', doctor.data.name)
+  //console.log('Doctor name ', doctor.data.name)
 
   // const newAppointment = await axios.post('/appointments', {
-  //   doctorName: 'Manuel',
-  //   patientName: 'Samuel',
+  //   doctorId: doctorManuel.data._id,
+  //   patientId: patientThomas.data._id,
   //   date: '24.02.2024',
   //   time: '9:00',
   // })
 
   // console.log('newAppointment:', newAppointment.data)
+
+  const newUser = await axios.post('/authentication/newUser', {
+    email: 'john@doe.com',
+    nickName: 'Johnny',
+    password: '1234',
+  })
+  console.log('newUser:', newUser.data)
+
   // await axios.delete('/patients/Pipo')
 
   // const patientChange = await axios.put('/patients/Samuel', {
