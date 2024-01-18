@@ -59,13 +59,18 @@ async function main() {
 
   // console.log('newAppointment:', newAppointment.data)
 
-  const newUser = await axios.post('/authentication/newUser', {
+  // const newUser = await axios.post('/authentication/newUser', {
+  //   email: 'john@doe.com',
+  //   nickName: 'Johnny',
+  //   password: '1234',
+  // })
+  // console.log('newUser:', newUser.data)
+
+  const loggedInNewUser = await axios.post('/authentication/session', {
     email: 'john@doe.com',
-    nickName: 'Johnny',
     password: '1234',
   })
-  console.log('newUser:', newUser.data)
-
+  console.log('loggedInNewUser:', loggedInNewUser.data)
   // await axios.delete('/patients/Pipo')
 
   // const patientChange = await axios.put('/patients/Samuel', {
