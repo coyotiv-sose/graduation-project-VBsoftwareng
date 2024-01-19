@@ -4,10 +4,15 @@ var Appointment = require('../model/appointment')
 const Patient = require('../model/patient')
 const Doctor = require('../model/doctor')
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send({ title: 'SiDoctor' })
+/* GET appointments listing. */
+
+router.get('/', async function (req, res, next) {
+  res.send(await Appointment.find())
 })
+// router.get('/:doctorId', async function (req, res, next) {
+//   const doctor = await Doctor.findById(req.params.doctorId)
+//   res.send(doctor)
+
 // add put handler to change appoitnment TO DO: CREATE A ROOT HANDLER FOR APPOINTMENT
 
 // router.put('/:date', function (req, res, next) {
@@ -20,23 +25,21 @@ router.get('/', function (req, res, next) {
 //   res.status(200).send(updatedStory)
 // })
 // Create a new appointment using post
-router.post('/', function (req, res, next) {
+router.post('/', async function (req, res, next) {
   console.log('------------------------------ Create Appointment ---------')
-  const { doctorName, patientName, date, time } = req.body
-  // create a new patient
-  const patientIndex = Patient.list.findIndex(patient => patient.name === patientName)
-  const patientInformation = Patient.list[patientIndex]
+  const { doctorId, patientId, date, time } = req.body
+  //find existing patient by id
+  const patient = await Patient.findById(patientId)
+  //const patientInformation = Patient.list[patientIndex]
 
-  const doctorIndex = Doctor.list.findIndex(doctor => doctor.name === doctorName)
-  const doctorInformation = Doctor.list[doctorIndex]
-
+  const doctor = await Doctor.findById(doctorId)
+  //const doctorInformation = Doctor.list[doctorIndex]
   //const doctorManuel = new Doctor('Manuel', 'Cruz', 'Intern', 'Berlin, Kreuzberg', 'Mullstrasse 30')
 
-  //HOW DO I GET ACCESS TO A RETURN APPOINTMENT
-  const newAppointment = patientInformation.book(doctorInformation, date, time)
+  const newAppointment = await patient.book(doctor, date, time)
 
   // send back that patient
-  console.log('------------------------------ Created Appointment ---------')
+  console.log('--------- Create Appointment ---------')
   res.send(newAppointment)
 })
 module.exports = router

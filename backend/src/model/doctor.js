@@ -2,6 +2,8 @@ const Appointment = require('./appointment.js')
 const MedicalRecord = require('./medicalRecord.js')
 const Address = require('./address.js')
 const mongoose = require('mongoose')
+const appointment = require('./appointment.js')
+const autopopulate = require('mongoose-autopopulate')
 
 const doctorSchema = new mongoose.Schema({
   name: String,
@@ -12,7 +14,7 @@ const doctorSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Address',
   },
-  appointments: [],
+  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment', autopopulate: true }],
   calendar: [],
   reviews: [],
 })
@@ -42,7 +44,8 @@ class Doctor {
   getsAppointment(patient, date, time) {
     const appointment = new Appointment(this, patient, date, time)
 
-    this.appointments.push(appointment) //  add appointment to patient's appointments
+    this.appointments.push(appointment)
+    //  add appointment to patient's appointments
   }
 
   isAvailable(date, time) {
@@ -74,5 +77,6 @@ class Doctor {
 
   // static list = []
 }
-
+doctorSchema.loadClass(Doctor)
+doctorSchema.plugin(autopopulate)
 module.exports = mongoose.model('Doctor', doctorSchema)
