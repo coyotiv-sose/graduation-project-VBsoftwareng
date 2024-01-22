@@ -12,20 +12,20 @@ var patientsRouter = require('./routes/patients.js')
 var doctorsRouter = require('./routes/doctors.js')
 var appointmentsRouter = require('./routes/appointments.js')
 var medicalRecordsRouter = require('./routes/medicalRecords.js')
+var authenticationRouter = require('./routes/authentication.js')
 
 // communication to the frontend
 const cors = require('cors')
 const session = require('express-session')
-
 const MongoStore = require('connect-mongo')
-
 const mongoose = require('mongoose')
 
 var app = express()
 
 // requires the model with Passport-Local Mongoose plugged in
-const User = require('./model/person')
+
 const passport = require('passport')
+const User = require('./model/authUser')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -66,11 +66,12 @@ app.use((req, res, next) => {
   req.session.ip = req.ip
   req.session.userName = 'Pipo'
 
-  console.log('Show me my request:', req.session)
+  //console.log('Show me my request:', req.session)
 
   next()
 })
-app.use(passport.initialize())
+
+app.use(passport.session())
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -82,6 +83,7 @@ app.use('/patients', patientsRouter)
 app.use('/doctors', doctorsRouter)
 app.use('/appointments', appointmentsRouter)
 app.use('/medicalRecords', medicalRecordsRouter)
+app.use('/authentication', authenticationRouter)
 
 // intercept any http request to the backend
 
@@ -100,6 +102,20 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500)
   res.render('error')
 })
+
+app.createSocketServer = function (server) {
+  const io = require('socket.io')(server)
+
+  console.log('Server side socket connection open')
+
+  io.on('connection', socket => {
+    console.log('a user connected')
+
+    socket.on('disconnect', () => {
+      console.log('user disconnected')
+    })
+  })
+}
 
 console.log(`i am alive!`)
 
