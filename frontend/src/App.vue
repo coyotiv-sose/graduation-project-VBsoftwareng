@@ -1,6 +1,34 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { mapState, mapActions } from 'pinia'
+import { authenticationStore } from './stores/authentication-store'
+import { socketStore } from './stores/socket'
+
+export default {
+  name: 'App',
+  components: {
+    HelloWorld,
+    RouterLink,
+    RouterView
+  },
+  async mounted() {
+    await this.retrieveUser()
+    await this.connect()
+  },
+  computed: {
+    ...mapState(authenticationStore, ['user']),
+    ...mapState(socketStore, ['connected'])
+  },
+  methods: {
+    ...mapActions(authenticationStore, ['retrieveUser', 'logout']),
+    async doLogout() {
+      await this.logout()
+      this.$router.push('/login') // @Digdem this is for you ;)
+    },
+    ...mapActions(socketStore, ['connect'])
+  }
+}
 </script>
 
 <template>
@@ -8,11 +36,20 @@ import HelloWorld from './components/HelloWorld.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="Hola Veronica you finally did it!" />
+      <HelloWorld msg="You did it!" />
+
+      <br />
+      <label v-if="user">Logged in as {{ user.nickName }}</label>
+      <br />
+      <label> Socket connection working: {{ connected ? 'yes' : 'no' }}</label>
+      <br />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink v-if="user" to="/">Home</RouterLink>
+        <RouterLink v-if="user" to="/about">About</RouterLink>
+        <RouterLink v-if="user" to="/test">Test</RouterLink>
+        <RouterLink v-if="!user" to="/login">Login</RouterLink>
+        <button v-if="user" @click="doLogout">Logout</button>
       </nav>
     </div>
   </header>

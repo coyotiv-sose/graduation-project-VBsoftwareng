@@ -104,7 +104,12 @@ app.use(function (err, req, res, next) {
 })
 
 app.createSocketServer = function (server) {
-  const io = require('socket.io')(server)
+  const io = require('socket.io')(server, {
+    cors: {
+      origin: true,
+      credentrials: true,
+    },
+  })
 
   console.log('Server side socket connection open')
 
