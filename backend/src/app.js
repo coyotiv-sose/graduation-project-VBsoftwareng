@@ -119,6 +119,10 @@ app.createSocketServer = function (server) {
     socket.on('disconnect', () => {
       console.log('user disconnected')
     })
+
+    setInterval(() => {
+      socket.emit('time', new Date().toTimeString().slice(0, 8))
+    }, 1000)
   })
 }
 
