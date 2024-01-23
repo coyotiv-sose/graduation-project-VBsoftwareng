@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios'
-const { data: users } = await axios.get('http://localhost:3000/users')
+const { data: users } = await axios.get(import.meta.env.VITE_BACKEND_URL + '/users')
 console.log(users)
 </script>
 

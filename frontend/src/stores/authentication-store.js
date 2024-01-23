@@ -10,7 +10,7 @@ export const useAuthenticationStore = defineStore('authentication', {
   actions: {
     async login(email, password) {
       const user = (
-        await axios.post('http://localhost:3000/authentication/login', {
+        await axios.post(import.meta.env.VITE_BACKEND_URL + '/authentication/login', {
           email,
           password
         })

@@ -9,7 +9,7 @@ export const useDoctorStore = defineStore('doctor', {
 
   actions: {
     async fetchDoctors() {
-      const doctors = (await axios.get('http://localhost:3000/doctors')).data
+      const doctors = (await axios.get(import.meta.env.VITE_BACKEND_URL + '/doctors')).data
 
       return doctors
     }
