@@ -50,21 +50,21 @@ async function main() {
   const doctor = await axios.get(`/doctors/${doctorNuman.data._id}`)
   //console.log('Doctor name ', doctor.data.name)
 
-  // const newAppointment = await axios.post('/appointments', {
-  //   doctorId: doctorManuel.data._id,
-  //   patientId: patientThomas.data._id,
-  //   date: '24.02.2024',
-  //   time: '9:00',
-  // })
+  const newAppointment = await axios.post('/appointments', {
+    doctorId: doctorManuel.data._id,
+    patientId: patientThomas.data._id,
+    date: '24.02.2024',
+    time: '9:00',
+  })
 
-  // console.log('newAppointment:', newAppointment.data)
+  console.log('newAppointment:', newAppointment.data)
 
-  // const newUser = await axios.post('/authentication/newUser', {
-  //   email: 'john@doe.com',
-  //   nickName: 'Johnny',
-  //   password: '1234',
-  // })
-  // console.log('newUser:', newUser.data)
+  const newUser = await axios.post('/authentication/newUser', {
+    email: 'manuel@doe.com',
+    nickName: 'Johnny',
+    password: '1234',
+  })
+  console.log('newUser:', newUser.data)
 
   const loggedInNewUser = await axios.post('/authentication/session', {
     email: 'john@doe.com',

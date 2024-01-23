@@ -35,22 +35,23 @@ console.log(process.env.ENVIRONMENT === 'production')
 let connectionPromise = mongoose.connection.asPromise().then(connection => (connectionPromise = connection.getClient()))
 
 app.use(cors())
-app.use(
-  session({
-    secret: 'SuperSecureSecretNobodyKnows', // is required to enrcypt your session specifically to you like
-    resave: false, // Forces the session to be saved back to the session store, even if the session was never modified
-    saveUninitialized: true,
-    cookie: {
-      secure: process.env.ENVIRONMENT === 'production', // TODO: set to true when using https
-      httpOnly: process.env.ENVIRONMENT === 'production',
-      maxAge: 1000 * 60 * 60 * 24 * 14, // how long the cookie is valid in ms
-    },
-    store: MongoStore.create({
-      clientPromise: connectionPromise,
-      stringify: false,
-    }),
-  })
-)
+
+const sessionMiddleware = session({
+  secret: 'SuperSecureSecretNobodyKnows', // is required to enrcypt your session specifically to you like
+  resave: false, // Forces the session to be saved back to the session store, even if the session was never modified
+  saveUninitialized: true,
+  cookie: {
+    secure: process.env.ENVIRONMENT === 'production', // TODO: set to true when using https
+    httpOnly: process.env.ENVIRONMENT === 'production',
+    maxAge: 1000 * 60 * 60 * 24 * 14, // how long the cookie is valid in ms
+  },
+  store: MongoStore.create({
+    clientPromise: connectionPromise,
+    stringify: false,
+  }),
+})
+
+app.use(sessionMiddleware)
 passport.use(User.createStrategy())
 
 // use static serialize and deserialize of model for passport session support
@@ -110,11 +111,17 @@ app.createSocketServer = function (server) {
       credentrials: true,
     },
   })
+  // app.use() only for socket.io
+  io.engine.use(sessionMiddleware)
+  io.engine.use(passport.session())
 
   console.log('Server side socket connection open')
 
   io.on('connection', socket => {
     console.log('a user connected')
+
+    const session = socket.request.session
+    console.log('Socket IO specific session', session)
 
     socket.on('disconnect', () => {
       console.log('user disconnected')

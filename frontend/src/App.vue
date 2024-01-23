@@ -2,7 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import { mapState, mapActions } from 'pinia'
-import { authenticationStore } from './stores/authentication-store'
+import { useAuthenticationStore } from './stores/authentication-store'
 import { socketStore } from './stores/socket'
 
 export default {
@@ -17,11 +17,11 @@ export default {
     await this.connect()
   },
   computed: {
-    ...mapState(authenticationStore, ['user']),
+    ...mapState(useAuthenticationStore, ['user']),
     ...mapState(socketStore, ['connected', 'time'])
   },
   methods: {
-    ...mapActions(authenticationStore, ['retrieveUser', 'logout']),
+    ...mapActions(useAuthenticationStore, ['retrieveUser', 'logout']),
     async doLogout() {
       await this.logout()
       this.$router.push('/login') // @Digdem this is for you ;)

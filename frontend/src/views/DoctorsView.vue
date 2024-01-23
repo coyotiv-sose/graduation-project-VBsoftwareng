@@ -1,5 +1,8 @@
 <script>
 import axios from 'axios'
+import { useDoctorStore } from '@/stores/doctor'
+import { mapActions } from 'pinia'
+
 export default {
   name: 'DoctorsView',
   components: {},
@@ -9,14 +12,14 @@ export default {
     }
   },
   methods: {
-    async fetchDoctors() {
-      const doctors = (await axios.get('http://localhost:3000/doctors')).data
-
-      this.doctors = doctors
-    }
+    ...mapActions(useDoctorStore, ['fetchDoctors'])
+    //   async fetchDoctors() {
+    //     const doctors = (await axios.get('http://localhost:3000/doctors')).data
+    //     this.doctors = doctors
+    //   }
   },
-  mounted() {
-    this.fetchDoctors()
+  async mounted() {
+    this.doctors = await this.fetchDoctors()
   }
 }
 </script>
