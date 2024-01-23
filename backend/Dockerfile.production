@@ -1,10 +1,10 @@
 FROM node:lts-alpine3.18
 
-  ENV NODE_ENV=production
+ENV NODE_ENV=production
 
 WORKDIR /app
-ADD package.json package-lock.json ./
 
+ADD package.json package-lock.json ./
 
 RUN npm install --production
 
@@ -13,4 +13,4 @@ ADD bin ./bin
 
 ADD src ./src
 
-CMD ["npm ", "start"]
+CMD ["npm" , "start"]
