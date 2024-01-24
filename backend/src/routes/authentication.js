@@ -24,6 +24,9 @@ router.post('/session', passport.authenticate('local', { failWithError: true }),
   console.log('User is authenticated')
   res.send(req.user)
 })
+router.get('/session', function (req, res) {
+  res.send(req.user)
+})
 
 router.post('/welcome', async function (req, res) {
   const { name, date, location } = req.body

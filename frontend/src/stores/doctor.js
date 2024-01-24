@@ -2,6 +2,9 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
+axios.defaults.withCredentials = true
+
 export const useDoctorStore = defineStore('doctor', {
   state: () => {
     return {}
@@ -9,7 +12,7 @@ export const useDoctorStore = defineStore('doctor', {
 
   actions: {
     async fetchDoctors() {
-      const doctors = (await axios.get(import.meta.env.VITE_BACKEND_URL + '/doctors')).data
+      const doctors = (await axios.get('/doctors')).data
 
       return doctors
     }

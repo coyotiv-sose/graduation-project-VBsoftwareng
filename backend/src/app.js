@@ -34,7 +34,12 @@ console.log(process.env.ENVIRONMENT === 'production')
 
 let connectionPromise = mongoose.connection.asPromise().then(connection => (connectionPromise = connection.getClient()))
 
-app.use(cors())
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+)
 
 const sessionMiddleware = session({
   secret: 'SuperSecureSecretNobodyKnows', // is required to enrcypt your session specifically to you like
