@@ -1,5 +1,4 @@
 <script>
-import axios from 'axios'
 import { useDoctorStore } from '@/stores/doctor'
 import { mapActions } from 'pinia'
 
