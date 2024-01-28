@@ -4,9 +4,13 @@ const Patient = require('../model/patient')
 
 /* GET patients listing. */
 router.get('/', async function (req, res, next) {
-  const patients = await Patient.findOne()
+  const patients = await Patient.find()
   // or you can also write an more simplified like res.send(await Patient.findOne())
-  res.send(Patient.list)
+  res.send(patients)
+})
+router.get('/:patientId', async function (req, res, next) {
+  const patient = await Patient.findById(req.params.patientId)
+  res.send(patient)
 })
 
 // Create a new Patient using post
