@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
 const appointmentSchema = new mongoose.Schema({
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Doctor',
+    autopopulate: true,
   },
   patient: {
     type: mongoose.Schema.Types.ObjectId,
@@ -32,4 +34,5 @@ class Appointment {
   // }
 }
 appointmentSchema.loadClass(Appointment)
+appointmentSchema.plugin(autopopulate)
 module.exports = mongoose.model('Appointment', appointmentSchema)
