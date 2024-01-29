@@ -29,10 +29,10 @@ export default {
 
     <ul>
       <li v-for="doctor in allDoctors" :key="doctor._id">
-        <!--<router-link to="/doctors/:doctor._id">doctor.name</router-link>-->
+        <router-link :to="`/doctors/${doctor._id}`">doctor.name</router-link>
         <p>{{ doctor.name }}</p>
         <p>{{ doctor._id }}</p>
-        <button @click="goToDetails(doctor._id)">Doctor info</button>
+        <button @click="goToDetails(doctor._id)">Details</button>
       </li>
     </ul>
   </main>
