@@ -3,6 +3,8 @@ var express = require('express')
 var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
+const mongoose = require('mongoose')
+
 require('dotenv').config()
 require('./database-connection')
 console.log(process.env.MONGODB_CONNECTION_STRING)
@@ -18,7 +20,6 @@ var authenticationRouter = require('./routes/authentication.js')
 const cors = require('cors')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
-const mongoose = require('mongoose')
 
 var app = express()
 
@@ -40,6 +41,8 @@ app.use(
     credentials: true,
   })
 )
+
+app.set('trust proxy', 1)
 
 const sessionMiddleware = session({
   secret: 'SuperSecureSecretNobodyKnows', // is required to enrcypt your session specifically to you like
