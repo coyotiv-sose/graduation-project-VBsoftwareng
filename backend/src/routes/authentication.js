@@ -3,24 +3,35 @@ var router = express.Router()
 const User = require('../model/authUser')
 const passport = require('passport')
 const welcomeGenerator = require('../api/welcome-generator')
+const Patient = require('../model/patient')
+const Doctor = require('../model/doctor')
 
 router.post('/newUser', async function (req, res, next) {
-  const { name, lastName, email, password } = req.body
-  const newUser = await User.register({ name, lastName, email }, password, function (err, user) {
+  const { name, lastName, email, password, role } = req.body
+  const newUser = await User.register({ email }, password, function (err, user) {
     if (err) {
       console.log('Error on user auth creation' + err)
     }
-    //res.send(user)
   })
 
-  //fetch session user
-  router.get('/session', async function (req, res) {
-    console.log('fetch session user')
-    res.send(req.user)
-  })
-  // const newUser = new User({ username: req.body.email, nickName: req.body.nickName });
-  // await newUser.setPassword(req.body.password);
-  // await newUser.save();
+  if (role === 'patient') {
+    await Patient.create({
+      name,
+      lastName,
+      birthate,
+      sex,
+      insurance,
+    })
+  }
+  if (role === 'doctor') {
+    await Doctor.create({
+      name,
+      lastName,
+      especialization,
+      location,
+      address,
+    })
+  }
 
   res.send(newUser)
 })
