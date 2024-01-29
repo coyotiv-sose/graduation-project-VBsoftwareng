@@ -1,7 +1,7 @@
 <script setup>
-import axios from 'axios'
-const { data: users } = await axios.get(import.meta.env.VITE_BACKEND_URL + '/users')
-console.log(users)
+// import axios from 'axios'
+// const { data: patients } = await axios.get(import.meta.env.VITE_BACKEND_URL + '/patients')
+// console.log(users)
 </script>
 
 <template>

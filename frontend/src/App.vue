@@ -13,19 +13,21 @@ export default {
     RouterView
   },
   async mounted() {
-    await this.retrieveUser()
+    await this.fetchUser()
     await this.connect()
   },
   computed: {
     ...mapState(useAuthenticationStore, ['user']),
     ...mapState(socketStore, ['connected', 'time'])
   },
+
   methods: {
-    ...mapActions(useAuthenticationStore, ['retrieveUser', 'logout']),
+    ...mapActions(useAuthenticationStore, ['fetchUser', 'logout']),
     async doLogout() {
       await this.logout()
       this.$router.push('/login') // @Digdem this is for you ;)
     },
+
     ...mapActions(socketStore, ['connect'])
   }
 }
@@ -49,8 +51,12 @@ export default {
       <nav>
         <RouterLink v-if="user" to="/">Home</RouterLink>
         <RouterLink v-if="user" to="/about">About</RouterLink>
-        <RouterLink v-if="user" to="/test">Test</RouterLink>
+
         <RouterLink v-if="!user" to="/login">Login</RouterLink>
+        <!--
+        <RouterLink v-if="user" to="/test">Test</RouterLink>
+
+        -->
         <button v-if="user" @click="doLogout">Logout</button>
       </nav>
     </div>

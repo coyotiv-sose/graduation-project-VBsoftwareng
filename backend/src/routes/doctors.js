@@ -8,8 +8,12 @@ router.get('/', async function (req, res, next) {
   res.send(await Doctor.find())
 })
 router.get('/:doctorId', async function (req, res, next) {
-  const doctor = await Doctor.findById(req.params.doctorId)
-  res.send(doctor)
+  try {
+    const doctor = await Doctor.findById(req.params.doctorId)
+    res.send(doctor)
+  } catch (error) {
+    res.sendStatus(404)
+  }
 
   //find doctor instance inside of the doctor list array by doctorName
   //res.send(Doctor.list.doctorName)
