@@ -43,6 +43,13 @@ router.post('/session', passport.authenticate('local', { failWithError: true }),
 router.get('/session', function (req, res) {
   res.send(req.user)
 })
+router.delete('/session', function (req, res) {
+  console.log('User is not logged in')
+  req.logout(() => {
+    console.log('User is logged out')
+    res.send(200)
+  })
+})
 
 router.post('/welcome', async function (req, res) {
   const { name, date, location } = req.body

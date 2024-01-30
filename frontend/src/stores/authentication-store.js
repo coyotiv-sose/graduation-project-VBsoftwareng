@@ -17,6 +17,13 @@ export const useAuthenticationStore = defineStore('authentication', {
       ).data
       this.user = user
     },
+    async logout() {
+      await axios.delete(import.meta.env.VITE_BACKEND_URL + '/authentication/session', {
+        withCredentials: true
+      })
+      this.user = null
+    },
+
     async retrieveUser() {
       const user = (
         await axios.get(import.meta.env.VITE_BACKEND_URL + '/authentication/session', {
