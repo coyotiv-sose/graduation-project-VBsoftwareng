@@ -56,13 +56,13 @@ export default {
 
     <div v-if="role === 'patient'">
       <label for="name">Name:</label>
-      <input id="name" v-model="patientName" type="date" />
+      <input id="name" v-model="patientName" type="text" />
       <label for="lastName">LastName:</label>
-      <input id="lastname" v-model="patientLastName" type="date" />
+      <input id="lastname" v-model="patientLastName" type="text" />
       <label for="sex">Sex:</label>
-      <input id="sex" v-model="patientSex" type="date" />
+      <input id="sex" v-model="patientSex" type="text" />
       <label for="insurance">Insurance:</label>
-      <input id="insurance" v-model="patientInsurance" type="date" />
+      <input id="insurance" v-model="patientInsurance" type="text" />
     </div>
 
     <input type="text" placeholder="Name" v-model="name" required />
