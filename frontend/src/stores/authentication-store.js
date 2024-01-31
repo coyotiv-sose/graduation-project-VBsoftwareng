@@ -7,13 +7,18 @@ export const useAuthenticationStore = defineStore('authentication', {
       user: null
     }
   },
+
   actions: {
     async login(email, password) {
       const user = (
-        await axios.post(import.meta.env.VITE_BACKEND_URL + '/authentication/login', {
-          email,
-          password
-        })
+        await axios.post(
+          import.meta.env.VITE_BACKEND_URL + '/authentication/session',
+          {
+            email,
+            password
+          },
+          { withCredentials: true }
+        )
       ).data
       this.user = user
     },
