@@ -29,22 +29,23 @@ export const useAuthenticationStore = defineStore('authentication', {
       this.user = null
     },
 
-    async retrieveUser() {
-      const user = (
-        await axios.get(import.meta.env.VITE_BACKEND_URL + '/authentication/session', {
-          withCredentials: true
-        })
-      ).data
+    // async retrieveUser() {
+    //   const user = (
+    //     await axios.get(import.meta.env.VITE_BACKEND_URL + '/authentication/session', {
+    //       withCredentials: true
+    //     })
+    //   ).data
 
-      this.user = user
-      return user
-    },
+    //   this.user = user
+    //   return user
+    // },
     async fetchUser() {
       const user = (
         await axios.get(import.meta.env.VITE_BACKEND_URL + '/authentication/session', {
           withCredentials: true
         })
       ).data
+      console.log('what comes back?', user)
       this.user = user
       return user
     }

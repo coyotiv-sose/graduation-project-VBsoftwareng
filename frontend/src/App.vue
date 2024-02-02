@@ -41,7 +41,8 @@ export default {
       <HelloWorld msg="You did it!" />
 
       <br />
-      <label v-if="user">Logged in as {{ user.nickName }}</label>
+      <label v-if="user">Logged in as {{ user.nickName }} {{ user.role }}</label>
+
       <br />
       <label> Socket connection working: {{ connected ? 'yes' : 'no' }}</label>
       <br />

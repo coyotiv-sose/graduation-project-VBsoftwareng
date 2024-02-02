@@ -17,6 +17,7 @@ const doctorSchema = new mongoose.Schema({
   appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment', autopopulate: true }],
   calendar: [],
   reviews: [],
+  authUser: { type: mongoose.Schema.Types.ObjectId, ref: 'AuthUser', required: true, autopopulate: true },
 })
 class Doctor {
   // appointments = []

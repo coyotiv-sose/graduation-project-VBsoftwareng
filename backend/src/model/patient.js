@@ -3,7 +3,6 @@ const Review = require('./review')
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
 
-
 const patientSchema = new mongoose.Schema({
   name: String,
   lastName: String,
@@ -12,6 +11,7 @@ const patientSchema = new mongoose.Schema({
   insurance: String,
   appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment', autopopulate: true }],
   medicalRecordHistory: [],
+  authUser: { type: mongoose.Schema.Types.ObjectId, ref: 'AuthUser', required: true, autopopulate: true },
 })
 
 class Patient {
