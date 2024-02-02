@@ -52,7 +52,7 @@ export default {
       <nav>
         <RouterLink v-if="user" to="/">Home</RouterLink>
         <RouterLink v-if="user" to="/about">About</RouterLink>
-
+        <RouterLink v-if="user?.role === 'patient'" to="/doctors">Choose a doctor</RouterLink>
         <RouterLink v-if="!user" to="/login">Login</RouterLink>
         <!--
         <RouterLink v-if="user" to="/test">Test</RouterLink>
