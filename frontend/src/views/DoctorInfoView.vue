@@ -48,6 +48,21 @@ export default {
   },
   methods: {
     ...mapActions(useDoctorStore, ['fetchDoctor']),
+    async slotsGeneratorAsync(
+      // date
+      d,
+      // nbDaysToDisplay
+      n,
+      start,
+      end,
+      timesBetween
+    ) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(slotsGenerator(d, n, start, end, timesBetween))
+        }, 1000)
+      })
+    },
 
     async nextDate() {
       this.loading = true
@@ -62,7 +77,13 @@ export default {
       const dateCopy = new Date(this.date)
       const newDate = new Date(dateCopy.setDate(dateCopy.getDate() + 7))
       this.date = newDate
-      this.meetingsDays = await slotsGeneratorAsync(newDate, this.nbDaysToDisplay, start, end, 30)
+      this.meetingsDays = await this.slotsGeneratorAsync(
+        newDate,
+        this.nbDaysToDisplay,
+        start,
+        end,
+        30
+      )
       this.loading = false
     },
     async previousDate() {
@@ -87,7 +108,13 @@ export default {
       const newDate =
         formatingDate(new Date()) >= formatingDate(dateCopy) ? new Date() : new Date(dateCopy)
       this.date = newDate
-      this.meetingsDays = await slotsGeneratorAsync(newDate, this.nbDaysToDisplay, start, end, 30)
+      this.meetingsDays = await this.slotsGeneratorAsync(
+        newDate,
+        this.nbDaysToDisplay,
+        start,
+        end,
+        30
+      )
       this.loading = false
     }
   },
@@ -97,21 +124,6 @@ export default {
     this.isLoading = false
   },
   async mounted() {
-    const slotsGeneratorAsync = async function (
-      // date
-      d,
-      // nbDaysToDisplay
-      n,
-      start,
-      end,
-      timesBetween
-    ) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(slotsGenerator(d, n, start, end, timesBetween))
-        }, 1000)
-      })
-    }
     const start = {
       hours: 8,
       minutes: 0
@@ -120,7 +132,13 @@ export default {
       hours: 16,
       minutes: 0
     }
-    this.meetingsDays = await slotsGeneratorAsync(this.date, this.nbDaysToDisplay, start, end, 30)
+    this.meetingsDays = await this.slotsGeneratorAsync(
+      this.date,
+      this.nbDaysToDisplay,
+      start,
+      end,
+      30
+    )
     this.loading = false
   }
 }
