@@ -48,6 +48,7 @@ export default {
   },
   methods: {
     ...mapActions(useDoctorStore, ['fetchDoctor']),
+    bookAppointment() {},
     async slotsGeneratorAsync(
       // date
       d,
@@ -149,6 +150,9 @@ export default {
   <main v-if="!isLoading">
     <h1>Doctor</h1>
     <p>{{ doctor.name }} {{ doctor.lastName }}</p>
+    <button>Book Appointment</button>
+    <button @click="goToDetails(doctor._id)">Details</button>
+    <p>{{ doctor.specialty }}</p>
 
     <div class="simple-example">
       <vue-meeting-selector
@@ -161,6 +165,7 @@ export default {
         @next-date="nextDate"
         @previous-date="previousDate"
       />
+
       <p>meeting Selected: {{ meeting ? meeting : 'No Meeting selected' }}</p>
     </div>
   </main>
