@@ -15,6 +15,15 @@ export const useAppointmentStore = defineStore('appointment', {
       const appointments = (await axios.get('/appointments')).data
 
       return appointments
+    },
+    async bookAppointment(doctorId, date, time) {
+      const newAppointment = await axios.post('/appointments', {
+        doctorId,
+        date,
+        time
+      })
+
+      return newAppointment
     }
   }
 })

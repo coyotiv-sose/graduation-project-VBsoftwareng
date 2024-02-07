@@ -26,9 +26,9 @@ class Patient {
   //   this.insurance = insurance
   // }
   async book(doctor, date, time) {
-    console.log(doctor, date, time)
+
     if (doctor.isAvailable(date, time)) {
-      console.log('Doctor is available')
+      
       const appointment = await Appointment.create({ doctor, patient: this, date, time })
 
       this.appointments.push(appointment) //  add appointment to patient's appointments

@@ -26,20 +26,16 @@ router.get('/', async function (req, res, next) {
 // })
 // Create a new appointment using post
 router.post('/', async function (req, res, next) {
-  console.log('------------------------------ Create Appointment ---------')
-  const { doctorId, patientId, date, time } = req.body
+  const { doctorId, date, time } = req.body
   //find existing patient by id
-  const patient = await Patient.findById(patientId)
-  //const patientInformation = Patient.list[patientIndex]
+  const patient = await Patient.findOne({ authUser: req.user._id })
 
   const doctor = await Doctor.findById(doctorId)
-  //const doctorInformation = Doctor.list[doctorIndex]
-  //const doctorManuel = new Doctor('Manuel', 'Cruz', 'Intern', 'Berlin, Kreuzberg', 'Mullstrasse 30')
 
   const newAppointment = await patient.book(doctor, date, time)
 
   // send back that patient
-  console.log('--------- Create Appointment ---------')
+
   res.send(newAppointment)
 })
 module.exports = router

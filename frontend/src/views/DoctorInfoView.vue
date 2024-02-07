@@ -5,7 +5,7 @@ import VueMeetingSelector from 'vue-meeting-selector'
 import 'vue-meeting-selector/dist/style.css'
 // Function used to generate slots, use your own function
 import slotsGenerator from '@/components/slotsGenerator'
-
+import { useAppointmentStore } from '@/stores/appointment'
 // import FullCalendar from '@fullcalendar/vue3'
 // import dayGridPlugin from '@fullcalendar/daygrid'
 // import interactionPlugin from '@fullcalendar/interaction'
@@ -48,7 +48,15 @@ export default {
   },
   methods: {
     ...mapActions(useDoctorStore, ['fetchDoctor']),
-    bookAppointment() {},
+    ...mapActions(useAppointmentStore, ['bookAppointment']),
+    async createAppointment() {
+      console.log(this.meeting)
+      const dateTimeString = this.meeting.date.toISOString()
+      const date = dateTimeString.substring(0, 10)
+      const time = dateTimeString.substring(11, 16)
+
+      await this.bookAppointment(this.doctor._id, date, time)
+    },
     async slotsGeneratorAsync(
       // date
       d,
@@ -130,7 +138,7 @@ export default {
       minutes: 0
     }
     const end = {
-      hours: 16,
+      hours: 18,
       minutes: 0
     }
     this.meetingsDays = await this.slotsGeneratorAsync(
@@ -150,9 +158,10 @@ export default {
   <main v-if="!isLoading">
     <h1>Doctor</h1>
     <p>{{ doctor.name }} {{ doctor.lastName }}</p>
-    <button>Book Appointment</button>
+    <p>{{ doctor.especialization }}</p>
+    <p>{{ doctor.address }}</p>
+    <button @click="createAppointment">Book Appointment</button>
     <button @click="goToDetails(doctor._id)">Details</button>
-    <p>{{ doctor.specialty }}</p>
 
     <div class="simple-example">
       <vue-meeting-selector

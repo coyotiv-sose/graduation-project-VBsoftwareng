@@ -50,6 +50,7 @@ class Doctor {
   }
 
   isAvailable(date, time) {
+
     //if there are no appointments previously made then they are free
     const existingAppointment = this.appointments.find(
       appointment => appointment.date === date && appointment.time === time
