@@ -27,27 +27,43 @@ export default {
   <!-- <h1>Your Appointments</h1> -->
 
   <div class="appointment-box" v-for="appointment in this.appointments" :key="appointment._id">
-    <text>
+    <div class="header">{{ appointment.time }} on {{ appointment.date }}</div>
+    <div>
       You have an appointment with Doctor {{ appointment.doctor.name }}
-      {{ appointment.doctor.lastName }} at {{ appointment.time }} on {{ appointment.date }}
-    </text>
+      {{ appointment.doctor.lastName }}
+    </div>
 
-    <br />
-    <button @click="goToDetails(appointment.doctor._id)">Details</button>
+    <div class="button-box">
+      <button class="button" @click="goToDetails(appointment.doctor._id)">Details</button>
 
-    <button @click="">Cancel</button>
+      <button class="button" @click="">Cancel</button>
+    </div>
   </div>
 
   <br />
 </template>
 <style scoped>
 .appointment-box {
-  border: 1px solid black;
-  width: 50vw;
+  /* border: 1px solid black; */
+  width: 60vw;
   height: 20vh;
-  padding: 10px;
+  /* padding: 10px; */
   display: inline-block;
   margin: 10px;
-  background-color: darkgray;
+  background-color: #9fc2da;
+  border-radius: 25px;
+}
+.header {
+  background-color: #5195a0;
+
+  border-radius: 25px 25px 0 0;
+  padding-left: 20px;
+}
+.button {
+  margin-left: 35px;
+  border-radius: 5px;
+}
+.button-box {
+  margin-bottom: 5px;
 }
 </style>
