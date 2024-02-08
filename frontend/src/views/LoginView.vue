@@ -43,7 +43,8 @@ export default {
     <input type="text" placeholder="Username" v-model="username" required />
     <input type="password" placeholder="Password" v-model="password" required />
     <button type="submit" @click="doLogin">Login</button>
-    <label>{{ status }}</label>
+    <label>Not yet a Si Doctor user?</label>
+    <RouterLink to="/signUp">Sign Up</RouterLink>
   </form>
 </template>
 <style scoped>
