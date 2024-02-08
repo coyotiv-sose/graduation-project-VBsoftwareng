@@ -91,7 +91,7 @@ export default {
     </div>
 
     <button type="submit" @click="signup">Sign up</button>
-
+    <label>Did you already Sign up ?</label>
     <label>{{ status }}</label>
   </form>
 </template>
