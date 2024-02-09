@@ -159,7 +159,11 @@ export default {
     <h1>Doctor</h1>
     <p>{{ doctor.name }} {{ doctor.lastName }}</p>
     <p>{{ doctor.especialization }}</p>
-    <p>{{ doctor.address }}</p>
+    <p class="adress">
+      {{ doctor.address.street }} {{ doctor.address.zipCode }}
+      {{ doctor.address.district }}
+      {{ doctor.address.city }}
+    </p>
     <button @click="createAppointment">Book Appointment</button>
     <button @click="goToDetails(doctor._id)">Details</button>
 
