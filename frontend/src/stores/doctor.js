@@ -20,6 +20,11 @@ export const useDoctorStore = defineStore('doctor', {
       const doctor = (await axios.get(`/doctors/${doctorId}`)).data
 
       return doctor
+    },
+    async fetchPatients() {
+      const patients = (await axios.get('/doctors/patientsInfo')).data
+
+      return patients
     }
   }
 })

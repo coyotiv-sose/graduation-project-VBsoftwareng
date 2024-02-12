@@ -60,7 +60,7 @@ export default {
         <RouterLink v-if="!user" to="/signUp">Sign Up</RouterLink>
         <RouterLink v-if="user?.role === 'patient'" to="/appointment">Your Appointments</RouterLink>
         <RouterLink v-if="user?.role === 'patient'" to="/doctors">Choose a doctor</RouterLink>
-        <RouterLink v-if="user?.role === 'doctor'" to="/patients"
+        <RouterLink v-if="user?.role === 'doctor'" to="/nextPatientsInfo"
           >Today patients appointments</RouterLink
         >
         <RouterLink v-if="!user" to="/login">Login</RouterLink>
