@@ -9,7 +9,7 @@ const patientSchema = new mongoose.Schema({
   birthdate: String,
   sex: String,
   insurance: String,
-  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment', autopopulate: true }],
+  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment', autopopulate: { maxDepth: 2 } }],
   medicalRecordHistory: [],
   authUser: { type: mongoose.Schema.Types.ObjectId, ref: 'AuthUser', required: true, autopopulate: true },
 })
@@ -26,9 +26,7 @@ class Patient {
   //   this.insurance = insurance
   // }
   async book(doctor, date, time) {
-
     if (doctor.isAvailable(date, time)) {
-      
       const appointment = await Appointment.create({ doctor, patient: this, date, time })
 
       this.appointments.push(appointment) //  add appointment to patient's appointments

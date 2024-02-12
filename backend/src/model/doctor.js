@@ -13,8 +13,9 @@ const doctorSchema = new mongoose.Schema({
   address: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Address',
+    autopopulate: true,
   },
-  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment', autopopulate: true }],
+  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment', autopopulate: { maxDepth: 2 } }],
   calendar: [],
   reviews: [],
   authUser: { type: mongoose.Schema.Types.ObjectId, ref: 'AuthUser', required: true, autopopulate: true },
@@ -50,7 +51,6 @@ class Doctor {
   }
 
   isAvailable(date, time) {
-
     //if there are no appointments previously made then they are free
     const existingAppointment = this.appointments.find(
       appointment => appointment.date === date && appointment.time === time

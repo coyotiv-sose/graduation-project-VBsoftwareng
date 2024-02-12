@@ -5,7 +5,7 @@ const appointmentSchema = new mongoose.Schema({
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Doctor',
-    autopopulate: true,
+    autopopulate: { maxDepth: 2 },
   },
   patient: {
     type: mongoose.Schema.Types.ObjectId,
