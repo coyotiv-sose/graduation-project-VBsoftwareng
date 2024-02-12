@@ -2,11 +2,23 @@ const express = require('express')
 const router = express.Router()
 const Doctor = require('../model/doctor')
 const Address = require('../model/address')
+const Appointment = require('../model/appointment')
+const Patient = require('../model/patient')
 
 /* GET doctors listing. */
 router.get('/', async function (req, res, next) {
   res.send(await Doctor.find())
 })
+
+router.get('/patientsInfo', async function (req, res, next) {
+  console.log('where are we')
+  const doctor = await Doctor.findOne({ authUser: req.user._id })
+  const appointments = await Appointment.find({ doctor: doctor._id })
+  const patientsIds = appointments.map(appointment => appointment.patient)
+  const patients = await Patient.find({ _id: { $in: patientsIds } })
+  res.send(patients)
+})
+
 router.get('/:doctorId', async function (req, res, next) {
   try {
     const doctor = await Doctor.findById(req.params.doctorId)
