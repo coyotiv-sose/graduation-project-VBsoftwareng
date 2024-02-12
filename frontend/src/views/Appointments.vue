@@ -50,11 +50,11 @@ export default {
   /* padding: 10px; */
   display: inline-block;
   margin: 10px;
-  background-color: #9fc2da;
+  background-color: #cfdce4;
   border-radius: 25px;
 }
 .header {
-  background-color: #5195a0;
+  background-color: #35a1df;
 
   border-radius: 25px 25px 0 0;
   padding-left: 20px;
