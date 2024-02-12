@@ -1,5 +1,6 @@
+import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/js/bootstrap.js'
+
 import './assets/main.css'
 
 import { createPinia } from 'pinia'
