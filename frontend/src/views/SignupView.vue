@@ -92,7 +92,7 @@ export default {
     </div>
 
     <button type="submit" @click="signup">Sign up</button>
-    <label>Did you already Sign up ?</label>
+    <p>Do you already have a <a href="/login">login</a>?</p>
     <label>{{ status }}</label>
   </form>
 </template>
@@ -100,8 +100,8 @@ export default {
 form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   height: 50vh;
 }
 </style>
