@@ -54,29 +54,30 @@ export default {
       <option value="patient">Patient</option>
     </select>
 
-    <input type="text" placeholder="Name" v-model="name" required />
-    <input type="text" placeholder="Lastname" v-model="lastName" required />
-    <input type="text" placeholder="Email" v-model="email" required />
-    <input type="password" placeholder="Password" v-model="password" required />
+    <!-- Container for inputs shown only when 'patient' is selected -->
     <div v-if="role === 'patient'">
-      <!-- <label for="name">Name:</label>
-      <input id="name" v-model="patientName" type="text" />
-      <label for="lastName">LastName:</label>
-      <input id="lastname" v-model="patientLastName" type="text" /> -->
-      <label for="sex">Sex:</label>
-      <input id="sex" v-model="sex" type="text" />
-      <label for="insurance">Insurance:</label>
-      <input id="insurance" v-model="insurance" type="text" />
-      <label for="birthdate">Birthdate:</label>
-      <input id="birthdate" v-model="birthdate" type="text" />
+      <input type="text" placeholder="Name" v-model="name" required />
+      <input type="text" placeholder="Lastname" v-model="lastName" required />
+      <input type="email" placeholder="Email" v-model="email" required />
+      <!-- Use type="email" for email validation -->
+      <input type="password" placeholder="Password" v-model="password" required />
+      <input type="text" placeholder="Sex" v-model="sex" required />
+      <input type="text" placeholder="Insurance" v-model="insurance" required />
+      <input type="date" placeholder="Birthdate" v-model="birthdate" required />
     </div>
 
     <div v-if="role === 'doctor'">
-      <!-- <label for="name">Name:</label>
-      <input id="name" v-model="doctorName" type="text" />
-      <label for="lastName">LastName:</label>
-      <input id="lastName" v-model="doctorLastName" type="text" /> -->
-      <label for="especialization">Especialization:</label>
+      <input type="specialization" placeholder="Specialization" v-model="Specialization" required />
+      <input type="text" placeholder="Name" v-model="name" required />
+      <input type="text" placeholder="Lastname" v-model="lastName" required />
+      <input type="email" placeholder="Email" v-model="email" required />
+      <input type="password" placeholder="Password" v-model="password" required />
+      <input type="address" placeholder="Address" v-model="street" required />
+      <input type="City" placeholder="City" v-model="city" required />
+      <input type="District" placeholder="State or District" v-model="district" required />
+      <input type="zipCode" placeholder="Post Code" v-model="zipCode" required />
+      <input type="country" placeholder="Country" v-model="country" required />
+      <!-- <label for="especialization">Especialization:</label>
       <input id="especialization" v-model="especialization" type="text" />
       <label for="location">Location:</label>
       <input id="location" v-model="location" type="text" />
@@ -87,7 +88,7 @@ export default {
       <label for="district">District:</label>
       <input id="district" v-model="address.district" type="text" />
       <label for="city">City:</label>
-      <input id="city" v-model="address.city" type="text" />
+      <input id="city" v-model="address.city" type="text" /> -->
     </div>
 
     <button type="submit" @click="signup">Sign up</button>
