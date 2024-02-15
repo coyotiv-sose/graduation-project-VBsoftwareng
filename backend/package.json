@@ -1,8 +1,8 @@
 {
-  "name": "dr4gon-teaching-examples",
+  "name": "Si Doctor",
   "version": "0.2.1",
   "private": true,
-  "description": "Dr4gon's teaching examples",
+  "description": "Si Doctor",
   "license": "MIT",
   "scripts": {
     "start": "node ./bin/www",
@@ -43,11 +43,15 @@
     "passport-local-mongoose": "^8.0.0",
     "pluralize": "^8.0.0",
     "pug": "^3.0.2",
-    "socket.io": "^4.7.4"
+    "socket.io": "^4.7.4",
+    "util.js": "^0.0.0"
   },
   "jest": {
     "setupFiles": [
       "dotenv/config"
+    ],
+    "setupFilesAfterEnv": [
+      "./test/setup.js"
     ]
   }
 }
