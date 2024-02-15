@@ -15,6 +15,7 @@ var doctorsRouter = require('./routes/doctors.js')
 var appointmentsRouter = require('./routes/appointments.js')
 var medicalRecordsRouter = require('./routes/medicalRecords.js')
 var authenticationRouter = require('./routes/authentication.js')
+var searchRouter = require('./routes/search.js')
 
 // communication to the frontend
 const cors = require('cors')
@@ -93,6 +94,7 @@ app.use('/doctors', doctorsRouter)
 app.use('/appointments', appointmentsRouter)
 app.use('/medicalRecords', medicalRecordsRouter)
 app.use('/authentication', authenticationRouter)
+app.use('/search', searchRouter)
 
 // intercept any http request to the backend
 
