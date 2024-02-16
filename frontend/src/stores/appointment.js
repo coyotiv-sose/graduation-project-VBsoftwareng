@@ -7,14 +7,14 @@ axios.defaults.withCredentials = true
 
 export const useAppointmentStore = defineStore('appointment', {
   state: () => {
-    return {}
+    return {
+      appointments: []
+    }
   },
 
   actions: {
     async fetchAppointments() {
-      const appointments = (await axios.get('/appointments')).data
-
-      return appointments
+      this.appointments = (await axios.get('/appointments')).data
     },
     async bookAppointment(doctorId, date, time) {
       const newAppointment = await axios.post('/appointments', {
@@ -23,7 +23,7 @@ export const useAppointmentStore = defineStore('appointment', {
         time
       })
 
-      return newAppointment
+      this.appointments.push(newAppointment.data)
     }
   }
 })

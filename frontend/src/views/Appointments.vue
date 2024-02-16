@@ -1,23 +1,35 @@
 <script>
 import { useAppointmentStore } from '@/stores/appointment'
 import { mapActions } from 'pinia'
+import { mapState } from 'pinia'
 
 export default {
   name: 'AppointmentsView',
   components: {},
   data() {
-    return {
-      appointments: []
-    }
+    return {}
   },
   methods: {
     ...mapActions(useAppointmentStore, ['fetchAppointments']),
     goToDetails(doctorId) {
       this.$router.push(`/doctors/${doctorId}`)
+    },
+
+    async cancelAppointment(appointmentId) {
+      try {
+        await axios.put(`/appointments/${appointmentId}`, { status: 'canceled' })
+        // Update UI !!, maybe remove the appointment from the list or show it as canceled
+        alert('Appointment canceled successfully')
+      } catch (error) {
+        console.error('Error canceling the appointment:', error)
+      }
     }
   },
   async mounted() {
-    this.appointments = await this.fetchAppointments()
+    await this.fetchAppointments()
+  },
+  computed: {
+    ...mapState(useAppointmentStore, ['appointments'])
   }
 }
 </script>
@@ -36,7 +48,7 @@ export default {
     <div class="button-box">
       <button class="button" @click="goToDetails(appointment.doctor._id)">Details</button>
 
-      <button class="button" @click="">Cancel</button>
+      <button class="button" @click="cancelAppointment(appointment.doctor._id)">Cancel</button>
     </div>
   </div>
 
