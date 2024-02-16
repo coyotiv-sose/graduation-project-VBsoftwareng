@@ -4,6 +4,7 @@ const Doctor = require('../model/doctor')
 const Address = require('../model/address')
 const Appointment = require('../model/appointment')
 const Patient = require('../model/patient')
+const MedicalRecord = require('../model/medicalRecord')
 
 /* GET doctors listing. */
 router.get('/', async function (req, res, next) {
@@ -26,23 +27,17 @@ router.get('/:doctorId', async function (req, res, next) {
   } catch (error) {
     res.sendStatus(404)
   }
-
-  //find doctor instance inside of the doctor list array by doctorName
-  //res.send(Doctor.list.doctorName)
-  //what steps i need to retrive a doctor?
-  //I need to look for an specific doctor in the list
-  // //for (let i = 0; i < Doctor.list.length; i++) {
-  //   // you see the doctor list
-
-  //   // you look for the doctor name you are searching
-  //   if (Doctor.list[i].name === req.params.doctorName) {
-  //     // if the name is valid or the same you are looking for then is that one if not another one
-
-  //     return res.send(Doctor.list[i])
-  //   }
-  // }
-  // res.sendStatus(404)
 })
+
+// router.get('/:doctorId/appointments', async function (req, res, next) {
+//   try {
+//     const doctor = await Doctor.findById(req.params.doctorId)
+//     const appointments = await Appointment.find({ doctor: doctor._id })
+//     res.send(appointments)
+//   } catch (error) {
+//     res.sendStatus(404)
+//   }
+// })
 
 // Create a new Doctor using post
 router.post('/', async function (req, res, next) {
@@ -67,7 +62,6 @@ router.delete('/:doctor', function (req, res, next) {
   Doctor.list.splice(doctorIndex, 1)
   // send back a response if succesfull
   res.sendStatus(200)
-  // when i am done commiting succesfull change i use git stash pop to get my changes back
 })
 
 module.exports = router
