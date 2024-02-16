@@ -2,6 +2,7 @@
 import { useAppointmentStore } from '@/stores/appointment'
 import { mapActions } from 'pinia'
 import { mapState } from 'pinia'
+import axios from 'axios'
 
 export default {
   name: 'AppointmentsView',
@@ -19,6 +20,7 @@ export default {
       try {
         await axios.put(`/appointments/${appointmentId}`, { status: 'canceled' })
         // Update UI !!, maybe remove the appointment from the list or show it as canceled
+        await this.fetchAppointments()
         alert('Appointment canceled successfully')
       } catch (error) {
         console.error('Error canceling the appointment:', error)
@@ -48,7 +50,13 @@ export default {
     <div class="button-box">
       <button class="button" @click="goToDetails(appointment.doctor._id)">Details</button>
 
-      <button class="button" @click="cancelAppointment(appointment.doctor._id)">Cancel</button>
+      <button
+        v-if="appointment.status !== 'canceled'"
+        class="button"
+        @click="cancelAppointment(appointment._id)"
+      >
+        Cancel
+      </button>
     </div>
   </div>
 

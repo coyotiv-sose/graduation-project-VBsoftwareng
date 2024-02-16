@@ -10,6 +10,7 @@ const appointmentSchema = new mongoose.Schema({
   patient: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Patient',
+    autopopulate: { maxDepth: 2 },
   },
   date: String,
   time: String,
@@ -20,6 +21,7 @@ const appointmentSchema = new mongoose.Schema({
   },
   reviewText: String,
   ratingNumber: Number,
+  status: String,
 })
 class Appointment {
   // constructor(doctorId, patientId, date, time, location, address) {

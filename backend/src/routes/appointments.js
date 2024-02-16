@@ -38,9 +38,33 @@ router.post('/', async function (req, res, next) {
 
   res.send(newAppointment)
 })
-module.exports = router
+// Update an existing appointment and cancel
+router.put('/:appointmentId', async function (req, res, next) {
+  try {
+    const { appointmentId } = req.params
+    const updateData = req.body
 
-// appointments => get all appointments
-// appointments/appointmentId => get one specific appointment with id
-// doctors/doctortName/reviews - get => get all reviews for that specific doctor
-// doctors/doctortName/reviews - post => create a new review
+    const cancelAppointment = await Appointment.findByIdAndUpdate(appointmentId, updateData, { new: true })
+    if (!cancelAppointment) {
+      return res.status(404).send({ message: 'Appointment not found' })
+    }
+    res.send(cancelAppointment)
+  } catch (error) {
+    next(error)
+  }
+})
+router.patch('/:appointmentId', async function (req, res, next) {
+  try {
+    const { appointmentId } = req.params
+    const { status } = req.body
+
+    const cancelAppointment = await Appointment.findByIdAndUpdate(appointmentId, updateData, { new: true })
+    if (!cancelAppointment) {
+      return res.status(404).send({ message: 'Appointment not found' })
+    }
+    res.send(cancelAppointment)
+  } catch (error) {
+    next(error)
+  }
+})
+module.exports = router
