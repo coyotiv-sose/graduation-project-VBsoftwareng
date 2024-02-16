@@ -12,6 +12,7 @@ export default {
     RouterLink,
     RouterView
   },
+
   async mounted() {
     await this.fetchUser()
     await this.connect()
@@ -25,7 +26,7 @@ export default {
     ...mapActions(useAuthenticationStore, ['fetchUser', 'logout']),
     async doLogout() {
       await this.logout()
-      this.$router.push('/login') // @Digdem this is for you ;)
+      this.$router.push('/login')
     },
 
     ...mapActions(socketStore, ['connect'])
@@ -35,39 +36,31 @@ export default {
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+    <img alt="Vue logo" class="logo" src="@/assets/SiDoctor.png" width="125" height="125" />
     <div class="wrapper">
       <HelloWorld msg="Si Doctor!" />
 
       <br />
-      <label v-if="user">Logged in as {{ user.email }} {{ user.role }}</label>
+      <label v-if="user">Logged in as {{ user.role }} {{ user.name }} {{ user.email }}</label>
 
       <br />
-      <label> Socket connection working: {{ connected ? 'yes' : 'no' }}</label>
-      <br />
-      <label> Current time: {{ time }}</label>
-      <br />
-      <!-- <form @submit.prevent="search">
-      <input type="text" v-model="searchTerm" placeholder="Search for a doctor...">
-      <button type="submit">Search</button>
-      </form>
-  </div> -->
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink v-if="!user" to="/signUp">Sign Up</RouterLink>
-        <RouterLink v-if="user?.role === 'patient'" to="/appointment">Your Appointments</RouterLink>
+        <RouterLink v-if="user?.role === 'patient'" to="/appointment">Appointments</RouterLink>
         <RouterLink v-if="user?.role === 'patient'" to="/doctors">Choose a doctor</RouterLink>
+        <RouterLink v-if="user?.role === 'patient'" to="/medicalRecords"
+          >Medical Records</RouterLink
+        >
+        <RouterLink v-if="user?.role === 'doctor'" to="/doctorAppointments"
+          >Doctor Appointments</RouterLink
+        >
         <RouterLink v-if="user?.role === 'doctor'" to="/nextPatientsInfo"
           >Today patients appointments</RouterLink
         >
         <RouterLink v-if="!user" to="/login">Login</RouterLink>
-        <!--
-        <RouterLink v-if="user" to="/test">Test</RouterLink>
-
-        -->
         <button v-if="user" @click="doLogout">Logout</button>
       </nav>
     </div>
