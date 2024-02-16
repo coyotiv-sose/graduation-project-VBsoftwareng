@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios'
+
 import { vModelCheckbox } from 'vue'
 export default {
   name: 'SignupView',
@@ -36,11 +37,12 @@ export default {
         address: this.address
       })
       if (newUser) {
-        this.status = 'Login successful'
+        this.status = 'Sign up successful'
       } else {
-        this.status = 'Login failed'
+        this.status = 'Sign up failed'
       }
       console.log(newUser.data)
+      this.$router.push('/login')
     }
   }
 }
