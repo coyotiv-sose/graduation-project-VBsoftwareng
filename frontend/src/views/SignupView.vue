@@ -1,5 +1,7 @@
 <script>
 import axios from 'axios'
+import { useAuthenticationStore } from '@/stores/authentication-store'
+import { mapActions } from 'pinia'
 
 import { vModelCheckbox } from 'vue'
 export default {
@@ -22,33 +24,34 @@ export default {
     }
   },
   methods: {
-    async signup() {
-      const newUser = await axios.post('http://localhost:3000/authentication/newUser', {
-        name: this.name,
-        lastName: this.lastName,
-        email: this.email,
-        password: this.password,
-        role: this.role,
-        birthdate: this.birthdate,
-        insurance: this.insurance,
-        sex: this.sex,
-        especialization: this.especialization,
-        location: this.location,
-        address: this.address
-      })
+    ...mapActions(useAuthenticationStore, ['signup']),
+    async doSignUp() {
+      const newUser = await this.signup(
+        this.name,
+        this.lastName,
+        this.email,
+        this.password,
+        this.role,
+        this.birthdate,
+        this.insurance,
+        this.sex,
+        this.especialization,
+        this.location,
+        this.address
+      )
       if (newUser) {
         this.status = 'Sign up successful'
       } else {
         this.status = 'Sign up failed'
       }
-      console.log(newUser.data)
+      console.log(newUser)
       this.$router.push('/login')
     }
   }
 }
 </script>
 <template>
-  <form v-on:submit.prevent>
+  <form v-on:submit.prevent="doSignUp">
     <h2>I am a</h2>
     <select v-model="role">
       <option disabled value="">Please select one</option>
@@ -69,31 +72,18 @@ export default {
     </div>
 
     <div v-if="role === 'doctor'">
-      <input type="specialization" placeholder="Specialization" v-model="Specialization" required />
+      <input type="text" placeholder="Especialization" v-model="especialization" required />
       <input type="text" placeholder="Name" v-model="name" required />
       <input type="text" placeholder="Lastname" v-model="lastName" required />
       <input type="email" placeholder="Email" v-model="email" required />
       <input type="password" placeholder="Password" v-model="password" required />
-      <input type="address" placeholder="Address" v-model="street" required />
-      <input type="City" placeholder="City" v-model="city" required />
-      <input type="District" placeholder="State or District" v-model="district" required />
-      <input type="zipCode" placeholder="Post Code" v-model="zipCode" required />
-      <input type="country" placeholder="Country" v-model="country" required />
-      <!-- <label for="especialization">Especialization:</label>
-      <input id="especialization" v-model="especialization" type="text" />
-      <label for="location">Location:</label>
-      <input id="location" v-model="location" type="text" />
-      <label for="street">Street:</label>
-      <input id="street" v-model="address.street" type="text" />
-      <label for="zipCode">ZipCodes:</label>
-      <input id="zipCode" v-model="address.zipCode" type="text" />
-      <label for="district">District:</label>
-      <input id="district" v-model="address.district" type="text" />
-      <label for="city">City:</label>
-      <input id="city" v-model="address.city" type="text" /> -->
+      <input type="text" placeholder="Address" v-model="address.street" required />
+      <input type="text" placeholder="ZipCode" v-model="address.zipCode" required />
+      <input type="text" placeholder="State or District" v-model="address.district" required />
+      <input type="text" placeholder="Location" v-model="location" required />
     </div>
 
-    <button type="submit" @click="signup">Sign up</button>
+    <button type="submit">Sign up</button>
     <p>Do you already have a <a href="/login">login</a>?</p>
     <label>{{ status }}</label>
   </form>

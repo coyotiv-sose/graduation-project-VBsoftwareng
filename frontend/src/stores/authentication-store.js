@@ -9,6 +9,38 @@ export const useAuthenticationStore = defineStore('authentication', {
   },
 
   actions: {
+    async signup(
+      name,
+      lastName,
+      email,
+      password,
+      role,
+      birthdate,
+      insurance,
+      sex,
+      especialization,
+      location,
+      address
+    ) {
+      const newUser = await axios.post(
+        import.meta.env.VITE_BACKEND_URL + '/authentication/newUser',
+        {
+          name,
+          lastName,
+          email,
+          password,
+          role,
+          birthdate,
+          insurance,
+          sex,
+          especialization,
+          location,
+          address
+        },
+        { withCredentials: true }
+      ).data
+      return newUser
+    },
     async login(email, password) {
       const user = (
         await axios.post(
