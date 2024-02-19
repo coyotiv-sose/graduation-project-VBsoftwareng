@@ -19,6 +19,7 @@ const doctorSchema = new mongoose.Schema({
   calendar: [],
   reviews: [],
   authUser: { type: mongoose.Schema.Types.ObjectId, ref: 'AuthUser', required: true, autopopulate: true },
+  medicalRecords: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MedicalRecord', autopopulate: true }],
 })
 class Doctor {
   // appointments = []
@@ -59,12 +60,15 @@ class Doctor {
     return !existingAppointment
     // return existingAppointment ? false : true
   }
-  createMedicalRecord(patient, diagnosis, prescription) {
+
+  async createMedicalRecord(patient, diagnosis, prescription) {
     //create MedicalRecord instance
-    const medicalRecord = new MedicalRecord(patient, diagnosis, prescription)
+    const medicalRecord = await MedicalRecord.create({ patient, diagnosis, prescription })
 
     //add the new medicalRecord instance to the patient medicalRecord
     patient.medicalRecordsHistory.push(medicalRecord)
+    await patient.save()
+
     return medicalRecord
   }
 
