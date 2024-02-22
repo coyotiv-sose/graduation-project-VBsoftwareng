@@ -49,11 +49,11 @@ const router = createRouter({
       name: 'patients',
       component: () => import('../views/PatientsView.vue')
     },
-    // {
-    //   path: '/medicalRecords', // the url u type in browser such as localhost:5137/test
-    //   name: 'medicalRecords',
-    //   component: () => import('../views/MedicalRecordsView.vue')
-    // },
+    {
+      path: '/medicalRecords', // the url u type in browser such as localhost:5137/test
+      name: 'medicalRecords',
+      component: () => import('../views/MedicalRecordsView.vue')
+    },
     {
       path: '/nextPatientsInfo', // the url u type in browser such as localhost:5137/test
       name: 'nextPatientsInfo',
