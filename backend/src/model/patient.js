@@ -10,7 +10,7 @@ const patientSchema = new mongoose.Schema({
   sex: String,
   insurance: String,
   appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment', autopopulate: { maxDepth: 2 } }],
-  medicalRecordHistory: [],
+  medicalRecordHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MedicalRecord', autopopulate: true }],
   authUser: { type: mongoose.Schema.Types.ObjectId, ref: 'AuthUser', required: true, autopopulate: true },
 })
 
