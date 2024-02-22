@@ -95,6 +95,7 @@ app.use('/appointments', appointmentsRouter)
 app.use('/medicalRecords', medicalRecordsRouter)
 app.use('/authentication', authenticationRouter)
 app.use('/search', searchRouter)
+app.use(express.static('public'))
 
 // intercept any http request to the backend
 
